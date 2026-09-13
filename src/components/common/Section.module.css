@@ -1,0 +1,14 @@
+.section {
+  padding-block: var(--section-space);
+  position: relative;
+}
+.soft {
+  background: var(--bg-secondary);
+}
+.inverse {
+  background: var(--bg-inverse);
+  color: var(--text-inverse);
+}
+.tight {
+  padding-block: clamp(56px, 7vw, 96px);
+}

@@ -1,0 +1,22 @@
+.label {
+  white-space: nowrap;
+  padding: 7px 10px;
+  border-radius: 999px;
+  font:
+    650 10px/1 Inter,
+    system-ui,
+    sans-serif;
+  letter-spacing: 0.04em;
+  border: 1px solid;
+  backdrop-filter: blur(12px);
+}
+.dark {
+  color: #dce3df;
+  background: rgba(10, 13, 12, 0.78);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.light {
+  color: #202622;
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(16, 19, 17, 0.12);
+}

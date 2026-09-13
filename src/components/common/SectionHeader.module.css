@@ -1,0 +1,25 @@
+.header {
+  max-width: 850px;
+  margin-bottom: clamp(42px, 6vw, 78px);
+}
+.header h2 {
+  margin: 18px 0 0;
+  font-size: clamp(42px, 6.2vw, 86px);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+  font-weight: 580;
+}
+.header p {
+  max-width: 680px;
+  margin: 24px 0 0;
+  color: var(--text-secondary);
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.55;
+}
+.center {
+  text-align: center;
+  margin-inline: auto;
+}
+.center :global(.eyebrow) {
+  justify-content: center;
+}

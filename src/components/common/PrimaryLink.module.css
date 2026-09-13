@@ -1,0 +1,28 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 650;
+  transition:
+    transform 180ms var(--ease-premium),
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+.link:hover {
+  transform: translateY(-2px);
+}
+.solid {
+  background: var(--brand-primary);
+  color: #fff;
+  border: 1px solid var(--brand-primary);
+}
+.ghost {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+}

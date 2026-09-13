@@ -1,0 +1,12 @@
+import EditorialHero from "../../components/common/EditorialHero.jsx";
+import Section from "../../components/common/Section.jsx";
+import SectionHeader from "../../components/common/SectionHeader.jsx";
+import CapabilityCard from "../../components/expertise/CapabilityCard.jsx";
+import PlatformCard from "../../components/platform/PlatformCard.jsx";
+import PageLoader from "../../components/feedback/PageLoader.jsx";
+import ErrorState from "../../components/feedback/ErrorState.jsx";
+import { useCapabilities, usePlatforms } from "../../queries/useContentQueries.js";
+import { useLocale } from "../../i18n/LocaleContext.jsx";
+import { useDocumentMeta } from "../../hooks/useDocumentMeta.js";
+import styles from "../shared/PageStyles.module.css";
+export default function ExpertisePage(){const{locale}=useLocale();const fr=locale==="fr";const capabilities=useCapabilities(locale);const platforms=usePlatforms(locale);useDocumentMeta({title:`Prosperya — ${fr?"Expertise":"Expertise"}`,description:fr?"Transformation ERP, intégration, automatisation et optimisation.":"ERP transformation, systems integration, automation and optimization."});if(capabilities.isLoading)return <PageLoader/>;if(capabilities.isError)return <ErrorState title={fr?"Impossible de charger l’expertise":"Could not load expertise"} onRetry={capabilities.refetch}/>;return <><EditorialHero eyebrow="Expertise" title={fr?"Concevoir le système derrière l’entreprise.":"Engineer the system behind the business."} description={fr?"De la transformation ERP à l’intégration et à l’automatisation, chaque discipline reste reliée au même modèle opérationnel.":"From ERP transformation to integration and automation, every discipline stays connected to the same operating model."}/><Section tone="soft"><div className={styles.cardGrid}>{capabilities.data.map((item)=><CapabilityCard key={item.id} capability={item} locale={locale}/>)}</div></Section><Section><SectionHeader eyebrow={fr?"Écosystème plateformes":"Platform ecosystem"} title={fr?"Une architecture au-delà de l’ERP.":"An architecture beyond the ERP."} description={fr?"Prosperya travaille à travers l’écosystème pour relier la finance, le CRM, l’intégration, l’analytics et les opérations.":"Prosperya works across the ecosystem to connect finance, CRM, integration, analytics and operations."}/><div className={styles.platformGrid}>{platforms.data?.map((platform)=><PlatformCard key={platform.id} platform={platform}/>)}</div></Section></>}

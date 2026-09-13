@@ -1,0 +1,52 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  min-height: 340px;
+  padding: 28px;
+  border-top: 1px solid var(--border-subtle);
+}
+.meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--text-tertiary);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.card h3 {
+  margin: 42px 0 14px;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+.card p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 30px;
+  font-size: 13px;
+  font-weight: 650;
+}
+.featured {
+  min-height: 500px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(var(--brand-primary-rgb), 0.12),
+      transparent 35%
+    ),
+    var(--bg-elevated);
+}
+.featured h3 {
+  font-size: clamp(42px, 5vw, 70px);
+  max-width: 760px;
+}
