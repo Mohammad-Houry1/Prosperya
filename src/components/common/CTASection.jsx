@@ -7,8 +7,8 @@ import { useLocale } from "../../i18n/LocaleContext.jsx";
 import styles from "./CTASection.module.css";
 
 /*
-  The Close: the last section of a page. Its Wave is always one still frame
-  (docs/adr/0001-no-repeat-rules.md); each page writes its own title. Three
+  The Close: the last section of a page. Its Wave moves (owner preference);
+  each page writes its own title. Three
   compositions:
   band  — full-bleed luminous panel (Home, Work, integration pages)
   card  — contained panel inside the page grid (Expertise, Approach, details)
@@ -60,7 +60,7 @@ export default function CTASection({
       <section className={`${styles.section} ${styles.split}`}>
         <PageContainer className={styles.splitInner}>
           <div className={styles.splitWave}>
-            <SignalWave shape="rise" strands={26} particles={120} still />
+            <SignalWave shape="rise" strands={26} particles={120} />
           </div>
           <div className={styles.splitCopy}>{copy}</div>
           <div className={styles.splitSide}>
@@ -73,7 +73,7 @@ export default function CTASection({
   const panel = (
     <div className={`${styles.panel} ${styles[variant]}`}>
       <div className={styles.wave}>
-        <SignalWave shape="ribbon" still />
+        <SignalWave shape="ribbon" />
       </div>
       <div className={styles.copy}>
         {copy}

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import PageContainer from "../../components/common/PageContainer.jsx";
 import Eyebrow from "../../components/common/Eyebrow.jsx";
 import PrimaryLink from "../../components/common/PrimaryLink.jsx";
@@ -16,8 +16,8 @@ const ORCHESTRATED_VIEW = { tilt: 0, zoom: 0.12, yaw: 0 };
 /*
   Home Hero: one screen, never pinned (docs/adr/0001-no-repeat-rules.md).
   The claim sits beside the Hub. On load the Hub settles once from fragmented
-  to orchestrated (under five seconds), then its scene stops rendering and
-  holds the finished frame. Reduced motion starts on that frame.
+  to orchestrated (under five seconds), then drifts gently while its systems
+  keep pulsing. Reduced motion starts on the finished, still frame.
 */
 export default function HeroSection() {
   const { locale } = useLocale();
@@ -27,7 +27,6 @@ export default function HeroSection() {
   const progress = useRef(reduced ? 1 : 0);
   const view = useRef(reduced ? { ...ORCHESTRATED_VIEW } : { tilt: -0.36, zoom: 0, yaw: 0.14 });
   const layout = useRef({ left: 0.06, right: 0.94 });
-  const [held, setHeld] = useState(false);
 
   useGsapContext(
     section,
@@ -40,8 +39,8 @@ export default function HeroSection() {
         .to(q("[data-status='before']"), { autoAlpha: 0, duration: 0.3 }, 2.9)
         .fromTo(q("[data-status='after']"), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, 3.1)
         .to(section.current, { "--resolve": 1, duration: 0.5 }, 3)
-        // Let the camera's damping land before the scene stops rendering.
-        .call(() => setHeld(true), null, "+=0.6");
+        // After the settle, a slow camera drift keeps the scene alive.
+        .to(view.current, { yaw: 0.07, duration: 7, ease: "sine.inOut", yoyo: true, repeat: -1 }, "+=0.2");
     },
     [],
   );
@@ -76,7 +75,7 @@ export default function HeroSection() {
         </div>
         <div className={styles.panel}>
           <div className={styles.visual}>
-            <OrchestrationExperience progressRef={progress} viewRef={view} layoutRef={layout} hold={held} />
+            <OrchestrationExperience progressRef={progress} viewRef={view} layoutRef={layout} />
           </div>
           <div className={styles.status} aria-hidden="true">
             <span data-status="before" className={reduced ? styles.gone : ""}>

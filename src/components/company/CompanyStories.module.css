@@ -71,11 +71,6 @@
 .marquee[data-paused] .marqueeTrack {
   animation-play-state: paused;
 }
-@media (hover: hover) and (pointer: fine) {
-  .marquee:hover .marqueeTrack {
-    animation-play-state: paused;
-  }
-}
 /* About: the same marks, standing still. */
 .stillRow {
   display: flex;

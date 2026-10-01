@@ -214,7 +214,7 @@ export default function CaseStudyPage() {
             </div>
             <div className={styles.nextCopy}>
               <div className={styles.nextWave} aria-hidden="true">
-                <SignalWave shape="rise" strands={22} particles={90} still />
+                <SignalWave shape="rise" strands={22} particles={90} />
               </div>
               <Eyebrow>{fr ? "Projet suivant" : "Next project"}</Eyebrow>
               <h2>{item.next.name}</h2>
