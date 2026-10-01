@@ -12,12 +12,15 @@ const OrchestrationCanvas = lazy(
 /*
   Chooses the renderer for the orchestration story: lazy WebGL on capable
   desktops, the shared-geometry SVG elsewhere. Rendering pauses whenever the
-  stage is off-screen or the tab is hidden.
+  stage is off-screen or the tab is hidden. `hold` freezes it on the current
+  frame (the Home Hero holds once its settle is done); WebGL then repaints only
+  on demand, so a theme change still redraws it.
 */
 export default function OrchestrationExperience({
   progressRef,
   viewRef,
   layoutRef,
+  hold = false,
 }) {
   const reduced = useReducedMotion();
   const small = useMediaQuery("(max-width: 980px)");
@@ -37,7 +40,7 @@ export default function OrchestrationExperience({
       document.removeEventListener("visibilitychange", update);
     };
   }, []);
-  const active = inView && visible;
+  const active = inView && visible && !hold;
   const fallback = (
     <SystemNetworkFallback
       progressRef={progressRef}
@@ -56,6 +59,7 @@ export default function OrchestrationExperience({
               viewRef={viewRef}
               layoutRef={layoutRef}
               active={active}
+              hold={hold}
             />
           </Suspense>
         </CanvasErrorBoundary>

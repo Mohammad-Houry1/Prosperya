@@ -9,38 +9,55 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
+// Renders the Home Hero with only the given media queries matching.
+async function renderHero(locale, matching = []) {
+  vi.stubGlobal("matchMedia", (query) => ({
+    matches: matching.includes(query),
+    media: query,
+    addEventListener() {},
+    removeEventListener() {},
+  }));
+  const { default: HeroSection } = await import("../../src/sections/home/HeroSection.jsx");
+  render(
+    <MemoryRouter initialEntries={[`/${locale}`]}>
+      <Routes>
+        <Route
+          path="/:locale"
+          element={
+            <LocaleProvider>
+              <HeroSection />
+            </LocaleProvider>
+          }
+        />
+      </Routes>
+    </MemoryRouter>,
+  );
+}
+
 it.each([
   ["en", /Complexity\.\s*Orchestrated\./, /Scroll to orchestrate/i],
   ["fr", /Complexité\.\s*Orchestrée\./, /Faites défiler pour orchestrer/i],
 ])(
   "shows the completed story without a scroll requirement in %s with reduced motion",
   async (locale, heading, hint) => {
-    vi.stubGlobal("matchMedia", (query) => ({
-      matches: query === "(prefers-reduced-motion: reduce)",
-      media: query,
-      addEventListener() {},
-      removeEventListener() {},
-    }));
-    const { default: HeroSection } = await import(
-      "../../src/sections/home/HeroSection.jsx"
-    );
-    render(
-      <MemoryRouter initialEntries={[`/${locale}`]}>
-        <Routes>
-          <Route
-            path="/:locale"
-            element={
-              <LocaleProvider>
-                <HeroSection />
-              </LocaleProvider>
-            }
-          />
-        </Routes>
-      </MemoryRouter>,
-    );
+    await renderHero(locale, ["(prefers-reduced-motion: reduce)"]);
     expect(
       screen.getByRole("heading", { level: 1, name: heading }),
     ).toBeVisible();
     expect(screen.queryByText(hint)).not.toBeInTheDocument();
+  },
+);
+
+it.each([
+  ["desktop", []],
+  ["a phone", ["(max-width: 980px)", "(max-width: 640px)"]],
+  ["reduced motion", ["(prefers-reduced-motion: reduce)"]],
+])(
+  "the Hero is one claim with its audiences and no chapters on %s",
+  async (_mode, matching) => {
+    await renderHero("en", matching);
+    expect(screen.getByRole("heading", { level: 1, name: /Complexity\.\s*Orchestrated\./ })).toBeVisible();
+    expect(screen.getByText("Built for ambitious organizations")).toBeInTheDocument();
+    expect(screen.queryAllByRole("heading", { level: 2 })).toHaveLength(0);
   },
 );

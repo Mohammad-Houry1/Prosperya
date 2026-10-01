@@ -1,5 +1,5 @@
-// Copy for the Home orchestration story. Kept beside the section because the
-// timeline choreography depends on its exact structure (four beats).
+// Copy for the Home Hero: the claim, its actions and audiences, and the status
+// line the Hub shows before and after its settle.
 export const heroCopy = {
   en: {
     eyebrow: "Paris-based. Globally minded.",
@@ -15,14 +15,7 @@ export const heroCopy = {
       ["landmark", "Public sector"],
       ["users", "Family business"],
     ],
-    hint: "Scroll to orchestrate",
     status: ["Fragmented architecture", "One operating architecture"],
-    chapters: [
-      ["Fragmented", "Every system tells a different story.", "ERP, CRM, finance and warehouse data drift apart. Teams reconcile by hand while decisions wait."],
-      ["Connected", "Prosperya becomes the orchestration layer.", "One architecture defines how systems exchange data — and who owns every flow."],
-      ["Automated", "Data starts to move on its own.", "Orders, invoices and inventory travel between systems without re-keying or waiting."],
-      ["Optimized", "Noise disappears.", "One operating architecture your teams can trust, measure and keep improving."],
-    ],
   },
   fr: {
     eyebrow: "À Paris. Ouvert sur le monde.",
@@ -38,13 +31,6 @@ export const heroCopy = {
       ["landmark", "Secteur public"],
       ["users", "Entreprises familiales"],
     ],
-    hint: "Faites défiler pour orchestrer",
     status: ["Architecture fragmentée", "Une architecture opérationnelle"],
-    chapters: [
-      ["Fragmenté", "Chaque système raconte une histoire différente.", "Les données ERP, CRM, finance et entrepôt divergent. Les équipes rapprochent à la main, les décisions attendent."],
-      ["Connecté", "Prosperya devient la couche d’orchestration.", "Une architecture définit comment les systèmes échangent leurs données — et qui porte chaque flux."],
-      ["Automatisé", "Les données circulent d’elles-mêmes.", "Commandes, factures et stocks passent d’un système à l’autre sans ressaisie ni attente."],
-      ["Optimisé", "Le bruit disparaît.", "Une architecture opérationnelle unique, fiable, mesurable et toujours perfectible."],
-    ],
   },
 };
