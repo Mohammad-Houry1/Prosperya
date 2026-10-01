@@ -4,25 +4,23 @@ Third pass completed 2026-09-19 against the ten supplied reference images. It re
 
 ## Art direction per page
 
-Each page has its own composition and motion idea; no two pages share a hero template. The radial hub belongs to Home (and the 404, which links back into it); listing pages no longer reuse it.
+Each page has its own composition and motion idea; no two pages share a hero template. The no-repeat rules (docs/adr/0001-no-repeat-rules.md, GLOSSARY.md): every Hero fits one screen and never pins; a page shows the Hub at most once; at most one Pinned story per page, below the Hero, about 2.25 screens, none on phones; every Close has a still Wave and its own title; the Marquee runs on Home only, with a pause control.
 
-Gestures: every horizontal scroller (testimonials, proof rail, strips, tabs, stage row) swipes natively on touch and trackpads and drags with the mouse via `src/motion/gestures.js` (flick, settle on an item, no accidental click).
-
-Shared motion: every hero `h1` and `RevealText` heading rises line by line out of a mask (GSAP SplitText); reduced motion leaves them static.
+Shared motion: each Hero title rises line by line on load (GSAP SplitText); only cards and images fade up as they enter; headings and body text never wait on a reveal. Gestures: every horizontal scroller swipes on touch and trackpads and drags with the mouse (`src/motion/gestures.js`).
 
 | Page | Composition | Motion |
 | --- | --- | --- |
-| Home | Pinned split stage: narrative column (claim, then four chapters) beside the 3D architecture in its own framed panel, so text never sits on the scene; client marquee below | Three.js + GSAP scroll timeline (camera tilt/zoom, chapters, rail); marquee drifts left to right and pauses on hover; featured work becomes a swipe rail below 1100px |
-| Expertise | Hero is a numbered capability index (six rows linking to the details), then the pinned four-moves story | Rules draw in row by row; hover fill sweeps from the left; scroll-driven state changes |
+| Home | One-screen Hero: claim beside the 3D Hub in a framed panel; client Marquee; "Built around NetSuite" as modules standing on one foundation (not a Hub); Close is the general band | The Hub settles once from fragmented to orchestrated on load (about 4s), then holds still; Marquee drifts left to right with a pause button; featured work becomes a swipe rail below 1100px |
+| Expertise | Hero is a numbered capability index, then the pinned four-moves section (the page's one Hub), then the architecture as a left-to-right flow | Index rows draw in and fill on hover; four moves pin for about 2.25 screens (no pin on phones); flow packets run twice, then stop |
 | Expertise detail | One metaphor per capability (layered architecture, connection mesh, automation lanes, …) + key outcomes, typed CMS sections | Hero progress drives the scene |
 | Solutions | Stacked hero over a four-panel strip, one metaphor per function, editorial rows, then a function-by-function proof rail (each function with its case) | Panels curtain in; the focused panel widens and its metaphor resolves; proof rail drags/swipes with arrows |
 | Solution detail | One metaphor per function: consolidation, workflow, network, insight | Scene progress, packets, bars |
 | Work | Hero is a fanned hand of case covers, editorial portfolio with filters, testimonial rail | Cards fan out on load and lift on hover; parallax only on wide features; testimonial rail drags/swipes |
-| Case study | Problem → before → transformation (pinned architecture morph) → after → outcome → metrics | Pinned morph, counters |
-| Approach | One delivery path through seven stages; collaboration shown as two circles meeting on shared goals | Pinned path with Prev/Next and sideways swipe on the stage panel; circles converge, overlap lights, return arc draws |
-| About | Calm editorial; no system diagram; client marquee; one-quote testimonial carousel | Four-line title rises line by line; photo unmasks upward; quotes swipe/drag with progress bars and arrows |
-| Insights | Magazine masthead (oversized title, drawn rule), featured story, filterable asymmetric grid, newsletter preview | Title rises line by line; grid re-staggers on each filter change |
-| Article | Centered masthead, 68ch measure, typed body blocks, related reading | Reading progress only |
+| Case study | Hero shows the case cover and headline facts; problem, before, transformation (pinned architecture morph, the page's one Hub), after, outcome; closes on the next case plus one contact line | Pinned morph (about 1.4 screens, static on phones), counters |
+| Approach | One delivery path through seven stages; collaboration as two circles meeting on shared goals | Pinned path for about 2.25 screens with Prev/Next and sideways swipe; circles converge, overlap lights, return arc draws |
+| About | Calm editorial; client marks shown still; one-quote testimonial carousel | Four-line title rises line by line; photo unmasks upward; quotes swipe or drag |
+| Insights | Magazine masthead, featured story, filterable asymmetric grid; closes with the newsletter | Title rises line by line; grid re-staggers on each filter change |
+| Article | Centered masthead, 68ch measure, typed body blocks, related reading; closes with the newsletter | Title rises line by line; reading progress |
 | Contact | Split statement + two-part brief (About you / Your project) | Focus rings, label color, note fade-in |
 | Legal | Calm reading layout with a table of contents that tracks the current section | None beyond color transitions |
 | 404 | Hub whose nodes route back into the site | Hub draw-in |
