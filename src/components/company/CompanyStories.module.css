@@ -3,9 +3,37 @@
 }
 .intro {
   display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  align-items: baseline;
+  gap: 16px 24px;
+  align-items: center;
+}
+.intro p {
+  margin: 0 0 0 auto;
+}
+.pause {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .pause:hover {
+    border-color: var(--brand-primary);
+    color: var(--text-primary);
+  }
+}
+.pause:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
 }
 .intro p,
 .demo {
@@ -40,10 +68,23 @@
     transform: translateX(0);
   }
 }
+.marquee[data-paused] .marqueeTrack {
+  animation-play-state: paused;
+}
 @media (hover: hover) and (pointer: fine) {
   .marquee:hover .marqueeTrack {
     animation-play-state: paused;
   }
+}
+/* About: the same marks, standing still. */
+.stillRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 28px clamp(32px, 4vw, 64px);
+  margin: 0;
+  padding: 28px 0 12px;
+  list-style: none;
 }
 .mark {
   display: flex;
@@ -262,7 +303,12 @@
 }
 @media (max-width: 760px) {
   .intro {
-    display: block;
+    flex-wrap: wrap;
+  }
+  .intro p {
+    order: 3;
+    flex-basis: 100%;
+    margin: 0;
   }
   .testimonial {
     grid-template-columns: 1fr;

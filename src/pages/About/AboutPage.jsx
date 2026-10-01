@@ -81,7 +81,7 @@ export default function AboutPage() {
           </figure>
         </PageContainer>
       </section>
-      <ClientCompanies />
+      <ClientCompanies still />
       <Section>
         <div className={styles.story}>
           <div>
