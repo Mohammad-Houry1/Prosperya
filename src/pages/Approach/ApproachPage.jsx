@@ -140,8 +140,7 @@ export default function ApproachPage() {
       <FrequentlyAskedQuestions topic="approach" layout="columns" />
       <CTASection
         variant="card"
-        eyebrow={fr ? "Prêt à transformer ?" : "Ready to transform?"}
-        title={fr ? "Construisons la suite — ensemble." : "Let’s build what’s next — together."}
+        title={fr ? "Traçons votre parcours ensemble." : "Map your path with us."}
         description={
           fr
             ? "Partagez vos objectifs : nous construirons une approche sur mesure pour un impact durable."

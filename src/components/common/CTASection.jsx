@@ -7,7 +7,9 @@ import { useLocale } from "../../i18n/LocaleContext.jsx";
 import styles from "./CTASection.module.css";
 
 /*
-  Closing call to action. Three compositions from the reference set:
+  The Close: the last section of a page. Its Wave is always one still frame
+  (docs/adr/0001-no-repeat-rules.md); each page writes its own title. Three
+  compositions:
   band  — full-bleed luminous panel (Home, Work, integration pages)
   card  — contained panel inside the page grid (Expertise, Approach, details)
   split — quiet two-column close for editorial pages (About, Insights)
@@ -23,9 +25,7 @@ export default function CTASection({
   const fr = locale === "fr";
   const copy = (
     <>
-      <Eyebrow>
-        {eyebrow ?? (fr ? "Construisons la suite" : "Let’s build what’s next")}
-      </Eyebrow>
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <RevealText as="h2" className={styles.title}>
         {title ??
           (fr
@@ -60,7 +60,7 @@ export default function CTASection({
       <section className={`${styles.section} ${styles.split}`}>
         <PageContainer className={styles.splitInner}>
           <div className={styles.splitWave}>
-            <SignalWave shape="rise" strands={26} particles={120} />
+            <SignalWave shape="rise" strands={26} particles={120} still />
           </div>
           <div className={styles.splitCopy}>{copy}</div>
           <div className={styles.splitSide}>
@@ -73,7 +73,7 @@ export default function CTASection({
   const panel = (
     <div className={`${styles.panel} ${styles[variant]}`}>
       <div className={styles.wave}>
-        <SignalWave shape="ribbon" />
+        <SignalWave shape="ribbon" still />
       </div>
       <div className={styles.copy}>
         {copy}

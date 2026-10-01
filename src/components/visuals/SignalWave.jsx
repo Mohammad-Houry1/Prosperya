@@ -72,6 +72,7 @@ export default function SignalWave({
   strands = 46,
   particles = 420,
   progressRef,
+  still = false,
   className = "",
 }) {
   const canvasRef = useRef(null);
@@ -148,7 +149,7 @@ export default function SignalWave({
       cancelAnimationFrame(frame);
       frame = 0;
       last = 0;
-      if (reduced) draw();
+      if (reduced || still) draw();
       else if (visible && !document.hidden) frame = requestAnimationFrame(tick);
     };
     const resize = () => {
@@ -175,7 +176,7 @@ export default function SignalWave({
       viewObserver.disconnect();
       document.removeEventListener("visibilitychange", start);
     };
-  }, [shape, strands, particles, theme, reduced, progressRef]);
+  }, [shape, strands, particles, theme, reduced, still, progressRef]);
   return (
     <canvas
       ref={canvasRef}

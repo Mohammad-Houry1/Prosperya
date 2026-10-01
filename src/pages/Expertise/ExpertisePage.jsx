@@ -68,12 +68,11 @@ export default function ExpertisePage() {
       </Section>
       <CTASection
         variant="card"
-        eyebrow={fr ? "Prêt à transformer ?" : "Ready to transform?"}
-        title={fr ? "Construisons la suite." : "Let’s build what’s next."}
+        title={fr ? "Vous hésitez entre plusieurs expertises ?" : "Not sure which capability you need?"}
         description={
           fr
-            ? "Transformons la complexité en clarté, et la stratégie en impact mesurable."
-            : "Partner with Prosperya to turn complexity into clarity and strategy into measurable impact."
+            ? "Décrivez le problème : nous vous indiquerons le bon point de départ."
+            : "Describe the problem. We will point you to the right starting point."
         }
         secondary={{ path: "contact", label: fr ? "Parler à un expert" : "Talk to an expert" }}
       />

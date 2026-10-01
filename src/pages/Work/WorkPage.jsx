@@ -135,11 +135,11 @@ export default function WorkPage() {
       <Testimonials variant="rail" />
       <CTASection
         variant="band"
-        title={fr ? "Prêt à écrire votre histoire de transformation ?" : "Ready to build your transformation story?"}
+        title={fr ? "Un défi comparable ?" : "Facing a similar challenge?"}
         description={
           fr
-            ? "Créons ensemble un impact mesurable. Échangeons sur ce qui est possible pour votre entreprise."
-            : "Let’s create measurable impact together. Connect with our team to explore what’s possible for your business."
+            ? "Dites-nous où vous en êtes : nous vous dirons à quoi pourrait ressembler un premier pas."
+            : "Tell us where you are. We will tell you what a first step could look like."
         }
       />
     </>

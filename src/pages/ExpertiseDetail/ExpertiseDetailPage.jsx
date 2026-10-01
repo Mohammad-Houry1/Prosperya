@@ -167,7 +167,6 @@ export default function ExpertiseDetailPage() {
       </Section>
       <CTASection
         variant={detail.cta ?? "card"}
-        eyebrow={fr ? "Prêt à avancer ?" : "Ready to move?"}
         title={detail.ctaTitle}
         description={detail.ctaText}
         secondary={{ path: "contact", label: fr ? "Parler à un expert" : "Talk to an expert" }}

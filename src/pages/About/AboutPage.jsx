@@ -196,7 +196,7 @@ export default function AboutPage() {
       <Testimonials />
       <CTASection
         variant="split"
-        title={fr ? "Prêt à transformer ce qui est possible ?" : "Ready to transform what’s possible?"}
+        title={fr ? "Commençons par une conversation." : "Start with a conversation."}
         description={fr ? "Construisons les systèmes qui porteront votre prochaine étape de croissance." : "Let’s build the systems that power your next level of growth."}
       />
     </>

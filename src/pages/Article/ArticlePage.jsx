@@ -3,13 +3,13 @@ import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, CalendarDays, Clock3 } from "lucide-react";
 import ReadingProgress from "./ReadingProgress.jsx";
 import styles from "./ArticlePage.module.css";
-import CTASection from "../../components/common/CTASection.jsx";
 import PageContainer from "../../components/common/PageContainer.jsx";
 import SectionHeader from "../../components/common/SectionHeader.jsx";
 import Section from "../../components/common/Section.jsx";
 import ResponsiveImage from "../../components/common/ResponsiveImage.jsx";
 import CoverArt from "../../components/visuals/CoverArt.jsx";
 import InsightCard from "../../components/insight/InsightCard.jsx";
+import Newsletter from "../../components/insight/Newsletter.jsx";
 import ErrorState from "../../components/feedback/ErrorState.jsx";
 import EmptyState from "../../components/feedback/EmptyState.jsx";
 import PageLoader from "../../components/feedback/PageLoader.jsx";
@@ -128,15 +128,9 @@ export default function ArticlePage() {
           </div>
         </Section>
       )}
-      <CTASection
-        variant="card"
-        title={fr ? "Une question d’architecture ?" : "Facing a similar architecture question?"}
-        description={
-          fr
-            ? "Parlons de votre contexte. Nous vous dirons honnêtement ce qui mérite d’être changé."
-            : "Talk it through with us. We’ll tell you honestly what is worth changing."
-        }
-      />
+      <Section>
+        <Newsletter />
+      </Section>
     </>
   );
 }

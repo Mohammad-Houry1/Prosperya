@@ -5,7 +5,6 @@ import PageContainer from "../../components/common/PageContainer.jsx";
 import PrimaryLink from "../../components/common/PrimaryLink.jsx";
 import Section from "../../components/common/Section.jsx";
 import Eyebrow from "../../components/common/Eyebrow.jsx";
-import CTASection from "../../components/common/CTASection.jsx";
 import CaseVisual from "../../components/case-study/CaseVisual.jsx";
 import ArchitectureMorph from "../../components/case-study/ArchitectureMorph.jsx";
 import SignalWave from "../../components/visuals/SignalWave.jsx";
@@ -206,15 +205,16 @@ export default function CaseStudyPage() {
           </figure>
         </div>
       </Section>
-      {item.next && (
-        <Section>
+      {/* The Close: the next case, then one line to talk about this one. */}
+      <Section>
+        {item.next && (
           <Link to={`/${locale}/work/${item.next.slug}`} className={styles.next}>
             <div className={styles.nextMedia} data-reveal="image" aria-hidden="true">
               <CaseVisual study={item.next} />
             </div>
             <div className={styles.nextCopy}>
               <div className={styles.nextWave} aria-hidden="true">
-                <SignalWave shape="rise" strands={22} particles={90} />
+                <SignalWave shape="rise" strands={22} particles={90} still />
               </div>
               <Eyebrow>{fr ? "Projet suivant" : "Next project"}</Eyebrow>
               <h2>{item.next.name}</h2>
@@ -225,17 +225,15 @@ export default function CaseStudyPage() {
               </span>
             </div>
           </Link>
-        </Section>
-      )}
-      <CTASection
-        variant="band"
-        title={fr ? "Prêt à transformer vos opérations ?" : "Ready to transform your operations?"}
-        description={
-          fr
-            ? "Construisons une entreprise connectée, efficace et durablement performante."
-            : "Let’s build a connected enterprise that drives efficiency, growth and lasting impact."
-        }
-      />
+        )}
+        <p className={styles.contactLine}>
+          {fr ? "Un projet comparable en tête ?" : "Have a similar project in mind?"}
+          <Link to={`/${locale}/contact`}>
+            {fr ? "Parler à un architecte" : "Talk to an architect"}
+            <ArrowRight size={15} strokeWidth={1.6} aria-hidden="true" />
+          </Link>
+        </p>
+      </Section>
     </>
   );
 }

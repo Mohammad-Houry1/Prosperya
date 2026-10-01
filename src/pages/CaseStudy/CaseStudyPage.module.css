@@ -378,3 +378,26 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+.contactLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin: 28px 0 0;
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+.contactLine a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-text);
+}
+.contactLine svg {
+  transition: transform 260ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .contactLine a:hover svg {
+    transform: translateX(4px);
+  }
+}

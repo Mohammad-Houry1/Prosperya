@@ -94,11 +94,11 @@ export default function SolutionsPage() {
       <SolutionProof solutions={data} studies={studies.data ?? []} locale={locale} />
       <CTASection
         variant="band"
-        title={fr ? "Prêt à transformer votre activité ?" : "Ready to transform your business?"}
+        title={fr ? "Quelle fonction faire évoluer en premier ?" : "Which function should move first?"}
         description={
           fr
-            ? "Voyons ensemble comment nos solutions peuvent vous aider à atteindre vos objectifs, plus vite."
-            : "Let’s connect and explore how our solutions can help you achieve your goals — faster."
+            ? "Nous vous aidons à choisir la fonction où le changement rapporte le plus vite."
+            : "We help you pick the function where change pays back first."
         }
         secondary={{ path: "expertise", label: fr ? "Nos expertises" : "Explore our expertise" }}
       />
