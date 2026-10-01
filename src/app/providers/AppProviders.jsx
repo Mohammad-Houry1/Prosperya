@@ -1,10 +1,10 @@
 import { MantineProvider, createTheme } from "@mantine/core";
-import { ThemeProvider, useAppTheme } from "../../theme/ThemeContext.jsx";
+import { useAppTheme } from "../../theme/ThemeContext.jsx";
+import { ThemeProvider } from "../../theme/ThemeProvider.jsx";
 import { AppQueryProvider } from "./QueryProvider.jsx";
 
 const mantineTheme = createTheme({
-  fontFamily:
-    "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
+  fontFamily: "var(--font-sans)",
   primaryColor: "teal",
   defaultRadius: "md",
 });

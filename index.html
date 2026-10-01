@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#070909" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#030b10" />
     <meta name="description" content="Prosperya — enterprise systems architecture and transformation." />
     <script>
       (() => {
@@ -14,7 +18,7 @@
           document.documentElement.dataset.theme = theme;
           document.documentElement.style.colorScheme = theme;
           const meta = document.querySelector('meta[name="theme-color"]');
-          if (meta) meta.content = theme === "dark" ? "#070909" : "#F7F8F7";
+          if (meta) meta.content = theme === "dark" ? "#030b10" : "#f8faf9";
         } catch {}
       })();
     </script>

@@ -1,50 +1,21 @@
+/*
+  Enterprise systems in the Home orchestration story.
+  angle/radius describe the fragmented start relative to the orchestrated
+  ellipse slot, so angular order is preserved and labels never cross.
+  z gives the fragmented landscape depth; orchestration flattens it.
+*/
 export const SYSTEM_NODES = [
-  {
-    id: "netsuite",
-    label: "NetSuite",
-    fragmented: [-2.9, 1.7, 0.5],
-    orchestrated: [-2.35, 1.35, 0],
-  },
-  {
-    id: "salesforce",
-    label: "Salesforce",
-    fragmented: [2.8, 1.85, -0.3],
-    orchestrated: [2.35, 1.35, 0],
-  },
-  {
-    id: "finance",
-    label: "Finance",
-    fragmented: [3.15, -1.45, 0.9],
-    orchestrated: [2.7, -0.95, 0],
-  },
-  {
-    id: "operations",
-    label: "Operations",
-    fragmented: [-3.25, -1.55, -0.2],
-    orchestrated: [-2.7, -0.95, 0],
-  },
-  {
-    id: "analytics",
-    label: "Analytics",
-    fragmented: [0.6, 2.55, -0.8],
-    orchestrated: [0, 2.05, 0],
-  },
-  {
-    id: "commerce",
-    label: "Commerce",
-    fragmented: [-0.5, -2.7, 0.5],
-    orchestrated: [0, -2.05, 0],
-  },
-  {
-    id: "treasury",
-    label: "Treasury",
-    fragmented: [3.8, 0.25, -0.7],
-    orchestrated: [3.2, 0.2, 0],
-  },
-  {
-    id: "planning",
-    label: "Planning",
-    fragmented: [-3.9, 0.15, 0.8],
-    orchestrated: [-3.2, 0.2, 0],
-  },
+  { id: "erp", icon: "layers", label: { en: "ERP", fr: "ERP" }, slot: 90, angle: 104, radius: 1.18, z: -0.6 },
+  { id: "finance", icon: "landmark", label: { en: "Finance", fr: "Finance" }, slot: 45, angle: 56, radius: 0.68, z: 0.8 },
+  { id: "logistics", icon: "truck", label: { en: "Logistics", fr: "Logistique" }, slot: 0, angle: 12, radius: 1.08, z: 0.2 },
+  { id: "warehouse", icon: "warehouse", label: { en: "Warehouse", fr: "Entrepôt" }, slot: -45, angle: -28, radius: 0.8, z: -0.9 },
+  { id: "analytics", icon: "chart", label: { en: "Analytics", fr: "Analytique" }, slot: -90, angle: -101, radius: 1.16, z: 0.5 },
+  { id: "commerce", icon: "cart", label: { en: "E-commerce", fr: "E-commerce" }, slot: -135, angle: -152, radius: 0.6, z: 0.9 },
+  { id: "crm", icon: "users", label: { en: "CRM", fr: "CRM" }, slot: 180, angle: 166, radius: 1.08, z: -0.4 },
+  { id: "hr", icon: "badge", label: { en: "HR", fr: "RH" }, slot: 135, angle: 121, radius: 0.64, z: 0.3 },
+];
+
+// Pairs of systems that exchange data by hand in the fragmented landscape.
+export const FRAGMENT_LINKS = [
+  [0, 2], [2, 5], [5, 1], [1, 3], [3, 6], [6, 4], [4, 7], [7, 0], [0, 5], [3, 4], [1, 6],
 ];

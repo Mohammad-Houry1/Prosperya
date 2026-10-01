@@ -1,3 +1,5 @@
+import { LEGAL_ROUTES } from "./legalRoutes.js";
+
 export const SUPPORTED_LOCALES = Object.freeze(["en", "fr"]);
 export const DEFAULT_LOCALE = "en";
 
@@ -22,5 +24,11 @@ export function replaceLocaleInPath(pathname, nextLocale) {
     segments.unshift(locale);
   }
 
+  if (segments.length === 2) {
+    const legal = Object.values(LEGAL_ROUTES).find((paths) =>
+      Object.values(paths).includes(segments[1]),
+    );
+    if (legal) segments[1] = legal[locale];
+  }
   return `/${segments.join("/")}`;
 }

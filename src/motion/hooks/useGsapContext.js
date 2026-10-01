@@ -1,9 +1,6 @@
 import { useLayoutEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "../gsap.js";
 import { useReducedMotion } from "../../hooks/useReducedMotion.js";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export function useGsapContext(scopeRef, setup, dependencies = []) {
   const reducedMotion = useReducedMotion();

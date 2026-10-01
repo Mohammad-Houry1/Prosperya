@@ -1,17 +1,31 @@
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import Eyebrow from "./Eyebrow.jsx";
-import RevealText from "../../motion/components/RevealText.jsx";
 import styles from "./SectionHeader.module.css";
 export default function SectionHeader({
   eyebrow,
   title,
   description,
   align = "left",
+  action,
+  as: Heading = "h2",
 }) {
   return (
-    <header className={`${styles.header} ${styles[align]}`}>
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <RevealText as="h2">{title}</RevealText>
-      {description && <RevealText as="p">{description}</RevealText>}
+    <header className={`${styles.header} ${styles[align]}`} data-reveal>
+      <div className={styles.copy}>
+        {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+        <Heading>{title}</Heading>
+        {description && align !== "split" && <p>{description}</p>}
+      </div>
+      {description && align === "split" && (
+        <p className={styles.aside}>{description}</p>
+      )}
+      {action && (
+        <Link className={styles.action} to={action.to}>
+          {action.label}
+          <ArrowRight size={15} strokeWidth={1.6} aria-hidden="true" />
+        </Link>
+      )}
     </header>
   );
 }

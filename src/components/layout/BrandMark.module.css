@@ -1,34 +1,24 @@
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
-  font-size: 13px;
-  letter-spacing: 0.14em;
-  font-weight: 750;
+  gap: 10px;
+  min-height: 44px;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+.brand strong {
+  font-weight: 500;
 }
 .symbol {
-  position: relative;
-  width: 18px;
-  height: 18px;
-  display: block;
+  width: 24px;
+  height: 26px;
+  color: var(--text-primary);
+  transition: transform 420ms var(--ease-out);
 }
-.symbol i {
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--brand-primary);
-}
-.symbol i:nth-child(1) {
-  left: 0;
-  top: 5px;
-}
-.symbol i:nth-child(2) {
-  right: 0;
-  top: 0;
-}
-.symbol i:nth-child(3) {
-  right: 0;
-  bottom: 0;
-  opacity: 0.55;
+@media (hover: hover) and (pointer: fine) {
+  .brand:hover .symbol {
+    transform: translate(2px, -2px);
+  }
 }

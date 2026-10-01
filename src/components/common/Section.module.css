@@ -1,6 +1,9 @@
 .section {
-  padding-block: var(--section-space);
   position: relative;
+  padding-block: var(--section-space);
+}
+.section + .section {
+  border-top: 1px solid var(--border-subtle);
 }
 .soft {
   background: var(--bg-secondary);
@@ -9,6 +12,6 @@
   background: var(--bg-inverse);
   color: var(--text-inverse);
 }
-.tight {
-  padding-block: clamp(56px, 7vw, 96px);
+.flush {
+  padding-block: 0;
 }

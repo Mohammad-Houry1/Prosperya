@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Burger, Drawer } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { NavLink } from "react-router-dom";
@@ -18,17 +19,22 @@ const links = [
 export default function SiteHeader() {
   const [opened, { open, close }] = useDisclosure(false);
   const { locale, t } = useLocale();
-  const openLabel =
-    locale === "fr" ? "Ouvrir la navigation" : "Open navigation";
+  const header = useRef(null);
+  const fr = locale === "fr";
+  useEffect(() => {
+    const update = () =>
+      header.current?.toggleAttribute("data-scrolled", window.scrollY > 8);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
   return (
-    <header className={styles.header}>
+    <header ref={header} className={styles.header}>
       <div className={styles.inner}>
         <BrandMark />
         <nav
           className={styles.desktopNav}
-          aria-label={
-            locale === "fr" ? "Navigation principale" : "Primary navigation"
-          }
+          aria-label={fr ? "Navigation principale" : "Primary navigation"}
         >
           {links.map((key) => (
             <NavLink
@@ -46,7 +52,7 @@ export default function SiteHeader() {
           <div className={styles.desktopActions}>
             <LocaleSwitcher />
             <ThemeSwitcher />
-            <PrimaryLink to={`/${locale}/contact`}>
+            <PrimaryLink to={`/${locale}/contact`} className={styles.cta}>
               {t("nav.contact")}
             </PrimaryLink>
           </div>
@@ -54,7 +60,7 @@ export default function SiteHeader() {
             className={styles.burger}
             opened={opened}
             onClick={open}
-            aria-label={openLabel}
+            aria-label={fr ? "Ouvrir la navigation" : "Open navigation"}
             size="sm"
           />
         </div>
@@ -65,20 +71,46 @@ export default function SiteHeader() {
         position="right"
         title={<BrandMark />}
         size="100%"
-        padding="xl"
+        padding="lg"
+        transitionProps={{
+          transition: "fade",
+          duration: 260,
+          timingFunction: "cubic-bezier(0.23, 1, 0.32, 1)",
+        }}
+        classNames={{
+          content: styles.drawerSurface,
+          header: styles.drawerSurface,
+          body: styles.drawerBody,
+        }}
+        closeButtonProps={{
+          "aria-label": fr ? "Fermer la navigation" : "Close navigation",
+        }}
       >
-        <nav className={styles.mobileNav}>
-          {links.map((key) => (
-            <NavLink key={key} onClick={close} to={`/${locale}/${key}`}>
+        <nav
+          className={styles.mobileNav}
+          aria-label={fr ? "Navigation principale" : "Primary navigation"}
+        >
+          {links.map((key, index) => (
+            <NavLink
+              key={key}
+              onClick={close}
+              to={`/${locale}/${key}`}
+              style={{ "--i": index }}
+            >
+              <span>{String(index + 1).padStart(2, "0")}</span>
               {t(`nav.${key}`)}
             </NavLink>
           ))}
-          <NavLink onClick={close} to={`/${locale}/contact`}>
-            {t("nav.contact")}
-          </NavLink>
         </nav>
+        <PrimaryLink
+          to={`/${locale}/contact`}
+          onClick={close}
+          className={styles.mobileCta}
+        >
+          {t("nav.contact")}
+        </PrimaryLink>
         <div className={styles.mobileControls}>
-          <LocaleSwitcher />
+          <LocaleSwitcher onNavigate={close} />
           <ThemeSwitcher />
         </div>
       </Drawer>

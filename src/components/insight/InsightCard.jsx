@@ -1,19 +1,70 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, CalendarDays, Clock3 } from "lucide-react";
 import { Link } from "react-router-dom";
+import ResponsiveImage from "../common/ResponsiveImage.jsx";
+import CoverArt from "../visuals/CoverArt.jsx";
 import styles from "./InsightCard.module.css";
-export default function InsightCard({ insight, locale, featured = false }) {
+
+const date = (value, locale) =>
+  new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeZone: "UTC" }).format(new Date(value));
+
+function Meta({ insight, locale }) {
   return (
-    <article className={`${styles.card} ${featured ? styles.featured : ""}`}>
-      <div className={styles.meta}>
-        <span>{insight.category}</span>
-        <span>{insight.readTime} min</span>
+    <p className={styles.meta}>
+      <span>
+        <CalendarDays size={14} strokeWidth={1.5} aria-hidden="true" />
+        <time dateTime={insight.publishedAt}>{date(insight.publishedAt, locale)}</time>
+      </span>
+      <span>
+        <Clock3 size={14} strokeWidth={1.5} aria-hidden="true" />
+        {insight.readTime} min {locale === "fr" ? "de lecture" : "read"}
+      </span>
+    </p>
+  );
+}
+
+/*
+  featured: the lead story — photograph beside a large headline.
+  default: a journal card — words first, a generative cover beneath.
+*/
+export default function InsightCard({ insight, locale, featured = false, large = false, index = 0 }) {
+  const to = `/${locale}/insights/${insight.slug}`;
+  const fr = locale === "fr";
+  if (featured)
+    return (
+      <article className={styles.featured}>
+        <div className={styles.featuredMedia} data-reveal="image" aria-hidden="true">
+          {insight.image ? (
+            <ResponsiveImage {...insight.image} alt="" priority />
+          ) : (
+            <CoverArt variant={insight.cover} seed={7} />
+          )}
+        </div>
+        <div className={styles.featuredCopy} data-reveal style={{ "--i": 2 }}>
+          <span className={styles.category}>{insight.category}</span>
+          <h3>{insight.title}</h3>
+          <p>{insight.excerpt}</p>
+          <Link to={to} className={styles.more}>
+            {fr ? "Lire l’article" : "Read the full article"}
+            <span className="visuallyHidden"> : {insight.title}</span>
+            <ArrowRight size={15} strokeWidth={1.6} aria-hidden="true" />
+          </Link>
+          <Meta insight={insight} locale={locale} />
+        </div>
+      </article>
+    );
+  return (
+    <article className={`${styles.card} ${large ? styles.large : ""}`} data-reveal style={{ "--i": index }}>
+      <div className={styles.art} aria-hidden="true">
+        <CoverArt variant={insight.cover} seed={insight.id.length * 3 + index} />
       </div>
-      <h3>{insight.title}</h3>
+      <span className={styles.category}>{insight.category}</span>
+      <h3>
+        <Link to={to} className={styles.stretch}>
+          {insight.title}
+        </Link>
+      </h3>
       <p>{insight.excerpt}</p>
-      <Link to={`/${locale}/insights/${insight.slug}`}>
-        {locale === "fr" ? "Lire l’analyse" : "Read insight"}{" "}
-        <ArrowUpRight size={16} />
-      </Link>
+      <Meta insight={insight} locale={locale} />
     </article>
   );
 }

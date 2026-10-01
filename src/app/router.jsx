@@ -3,6 +3,9 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import RootRedirect from "./RootRedirect.jsx";
 import LocaleGate from "./LocaleGate.jsx";
 import SiteLayout from "./SiteLayout.jsx";
+import { LEGAL_ROUTES } from "../i18n/legalRoutes.js";
+
+const LegalPage = lazy(() => import("../pages/Legal/LegalPage.jsx"));
 
 const HomePage = lazy(() => import("../pages/Home/HomePage.jsx"));
 const ExpertisePage = lazy(
@@ -49,6 +52,12 @@ export const router = createBrowserRouter([
           { path: "insights", element: <InsightsPage /> },
           { path: "insights/:slug", element: <ArticlePage /> },
           { path: "contact", element: <ContactPage /> },
+          ...Object.entries(LEGAL_ROUTES).flatMap(([documentId, paths]) =>
+            Object.values(paths).map((path) => ({
+              path,
+              element: <LegalPage documentId={documentId} />,
+            })),
+          ),
           { path: "*", element: <NotFoundPage /> },
         ],
       },

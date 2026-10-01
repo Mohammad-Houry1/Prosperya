@@ -1,28 +1,32 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import CaseStudyMetric from "./CaseStudyMetric.jsx";
+import CaseVisual from "./CaseVisual.jsx";
+import AnimatedCounter from "../../motion/components/AnimatedCounter.jsx";
 import styles from "./CaseStudyCard.module.css";
 export default function CaseStudyCard({ study, locale, index = 0 }) {
   return (
-    <article className={styles.card}>
-      <div className={styles.visual} aria-hidden="true">
-        <span>{String(index + 1).padStart(2, "0")}</span>
-        <div className={styles.orbit} />
-        <div className={styles.orbitSmall} />
-        <i />
+    <article className={styles.card} data-reveal style={{ "--i": index }}>
+      <div className={styles.media} aria-hidden="true">
+        <CaseVisual study={study} />
       </div>
       <div className={styles.content}>
         <span className={styles.category}>{study.category}</span>
-        <h3>{study.title}</h3>
+        <h3>{study.name ?? study.title}</h3>
         <p>{study.description}</p>
-        <div className={styles.metrics}>
+        <dl className={styles.metrics}>
           {study.metrics.slice(0, 3).map((metric) => (
-            <CaseStudyMetric key={metric.id} metric={metric} />
+            <div key={metric.id}>
+              <dt>{metric.label}</dt>
+              <dd>
+                <AnimatedCounter value={metric.value} />
+              </dd>
+            </div>
           ))}
-        </div>
-        <Link to={`/${locale}/work/${study.slug}`}>
-          {locale === "fr" ? "Voir la transformation" : "View transformation"}{" "}
-          <ArrowUpRight size={16} />
+        </dl>
+        <Link className={styles.link} to={`/${locale}/work/${study.slug}`}>
+          {locale === "fr" ? "Voir le cas client" : "View case study"}
+          <span className="visuallyHidden"> : {study.name ?? study.title}</span>
+          <ArrowRight size={15} strokeWidth={1.6} aria-hidden="true" />
         </Link>
       </div>
     </article>

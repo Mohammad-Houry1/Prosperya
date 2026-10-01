@@ -13,17 +13,19 @@ export default class AppErrorBoundary extends React.Component {
   }
   render() {
     if (this.state.error) {
+      const fr = window.location.pathname.split("/")[1] === "fr";
       return (
         <main className={styles.wrap}>
           <div>
-            <span>PROSPERYA / SYSTEM ERROR</span>
-            <h1>The interface hit an unexpected state.</h1>
+            <span>PROSPERYA</span>
+            <h1>{fr ? "Une erreur est survenue." : "Something went wrong."}</h1>
             <p>
-              Reload the page to reset the client application. If this persists,
-              inspect the browser console and route data.
+              {fr
+                ? "Rechargez la page pour réessayer."
+                : "Reload the page to try again."}
             </p>
             <button type="button" onClick={() => window.location.reload()}>
-              Reload application
+              {fr ? "Recharger la page" : "Reload page"}
             </button>
           </div>
         </main>

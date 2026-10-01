@@ -7,13 +7,14 @@ export default function BrandMark() {
     <Link
       to={`/${locale}`}
       className={styles.brand}
-      aria-label="Prosperya home"
+      aria-label={locale === "fr" ? "Accueil Prosperya" : "Prosperya home"}
     >
-      <span className={styles.symbol}>
-        <i />
-        <i />
-        <i />
-      </span>
+      <svg className={styles.symbol} viewBox="0 0 50 50" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M3 5 47 18 21 24 8 46 13 22ZM23 25 47 18 23 40Z"
+        />
+      </svg>
       <strong>PROSPERYA</strong>
     </Link>
   );

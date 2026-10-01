@@ -1,15 +1,240 @@
-import { useParams } from "react-router-dom";
-import EditorialHero from "../../components/common/EditorialHero.jsx";
-import Section from "../../components/common/Section.jsx";
-import SectionHeader from "../../components/common/SectionHeader.jsx";
-import Metric from "../../components/common/Metric.jsx";
-import PlatformCard from "../../components/platform/PlatformCard.jsx";
-import ArchitectureComparison from "../../components/case-study/ArchitectureComparison.jsx";
-import EmptyState from "../../components/feedback/EmptyState.jsx";
-import PageLoader from "../../components/feedback/PageLoader.jsx";
+import { ArrowRight, Quote, Lock } from "lucide-react";
+import { Link, useParams } from "react-router-dom";
+import PageHero from "../../components/common/PageHero.jsx";
+import PageContainer from "../../components/common/PageContainer.jsx";
 import PrimaryLink from "../../components/common/PrimaryLink.jsx";
+import Section from "../../components/common/Section.jsx";
+import Eyebrow from "../../components/common/Eyebrow.jsx";
+import CTASection from "../../components/common/CTASection.jsx";
+import CaseVisual from "../../components/case-study/CaseVisual.jsx";
+import ArchitectureMorph from "../../components/case-study/ArchitectureMorph.jsx";
+import HubDiagram, { hubStyles } from "../../components/visuals/HubDiagram.jsx";
+import SignalWave from "../../components/visuals/SignalWave.jsx";
+import SystemIcon from "../../components/system/SystemIcon.jsx";
+import RevealText from "../../motion/components/RevealText.jsx";
+import AnimatedCounter from "../../motion/components/AnimatedCounter.jsx";
+import EmptyState from "../../components/feedback/EmptyState.jsx";
+import ErrorState from "../../components/feedback/ErrorState.jsx";
+import PageLoader from "../../components/feedback/PageLoader.jsx";
 import { useCaseStudy, usePlatforms } from "../../queries/useContentQueries.js";
 import { useLocale } from "../../i18n/LocaleContext.jsx";
 import { useDocumentMeta } from "../../hooks/useDocumentMeta.js";
-import styles from "../shared/PageStyles.module.css";
-export default function CaseStudyPage(){const{slug}=useParams();const{locale}=useLocale();const fr=locale==="fr";const study=useCaseStudy(locale,slug);const platforms=usePlatforms(locale);const item=study.data;useDocumentMeta({title:item?`Prosperya — ${item.title}`:(fr?"Prosperya — Projets":"Prosperya — Work"),description:item?.description});if(study.isLoading)return <PageLoader/>;if(!item)return <Section><EmptyState title={fr?"Cas introuvable":"Case study not found"}/></Section>;const relatedPlatforms=(platforms.data??[]).filter((p)=>item.platformIds.includes(p.id));return <><EditorialHero eyebrow={item.category} title={item.title} description={item.description} aside={fr?"Structure illustrative V1 · Remplacer par des preuves client approuvées avant publication":"Illustrative V1 case-study structure · Replace with approved client evidence before publication"}/><Section><div className={styles.detailIntro}><h2>{fr?"Le contexte.":"The context."}</h2><p>{item.challenge}</p></div><div className={styles.detailList}><div className={styles.detailRow}><span>01 / {fr?"Défi":"Challenge"}</span><div><h3>{fr?"Complexité existante":"Existing complexity"}</h3><p>{item.challenge}</p></div></div><div className={styles.detailRow}><span>02 / Architecture</span><div><h3>{fr?"Intervention Prosperya":"Prosperya intervention"}</h3><p>{item.solution}</p></div></div><div className={styles.detailRow}><span>03 / {fr?"Résultat":"Outcome"}</span><div><h3>{fr?"Nouveau modèle":"New operating model"}</h3><p>{item.outcome}</p></div></div></div></Section><Section tone="soft"><SectionHeader eyebrow="Architecture" title={fr?"Du fragmenté à l’orchestré.":"From fragmented to orchestrated."}/><ArchitectureComparison locale={locale}/></Section><Section><SectionHeader eyebrow={fr?"Signaux de résultat":"Outcome signals"} title={fr?"Mesurer le changement opérationnel.":"Measure the operational change."}/><div className={styles.platformGrid}>{item.metrics.map((metric)=><Metric key={metric.id} metric={metric}/>)}</div></Section><Section tone="soft"><SectionHeader eyebrow={fr?"Paysage système":"System landscape"} title={fr?"Plateformes impliquées.":"Platforms in the architecture."}/><div className={styles.platformGrid}>{relatedPlatforms.map((platform)=><PlatformCard key={platform.id} platform={platform}/>)}</div></Section><Section><PrimaryLink to={`/${locale}/contact`}>{fr?"Démarrer une conversation similaire":"Start a similar conversation"}</PrimaryLink></Section></>}
+import styles from "./CaseStudyPage.module.css";
+
+export default function CaseStudyPage() {
+  const { slug } = useParams();
+  const { locale } = useLocale();
+  const fr = locale === "fr";
+  const study = useCaseStudy(locale, slug);
+  const platforms = usePlatforms(locale);
+  const item = study.data;
+  useDocumentMeta({
+    title: item ? `${item.name} — Prosperya` : fr ? "Prosperya — Projets" : "Prosperya — Work",
+    description: item?.detail?.intro ?? item?.description,
+  });
+  if (study.isLoading) return <PageLoader />;
+  if (study.isError)
+    return (
+      <Section>
+        <ErrorState onRetry={() => study.refetch()} />
+      </Section>
+    );
+  if (!item || !item.detail)
+    return (
+      <Section>
+        <EmptyState title={fr ? "Cas introuvable" : "Case study not found"} />
+      </Section>
+    );
+  const detail = item.detail;
+  const stack = (platforms.data ?? []).filter((p) => item.platformIds.includes(p.id) && p.id !== "netsuite");
+  const [quote, role, org] = detail.quote;
+  return (
+    <>
+      <PageHero
+        breadcrumb={[
+          { label: fr ? "Projets" : "Work", to: `/${locale}/work` },
+          { label: fr ? "Cas clients" : "Case studies", to: `/${locale}/work` },
+          { label: item.name },
+        ]}
+        eyebrow={fr ? "Secteur" : "Industry"}
+        title={item.name}
+        titleClassName={styles.title}
+        lead={
+          <>
+            <p className={styles.industry}>{detail.industryLabel}</p>
+            <p>{detail.intro}</p>
+          </>
+        }
+        actions={
+          <>
+            <PrimaryLink to={`/${locale}/contact`}>{fr ? "Discuter d’un projet similaire" : "Discuss a similar project"}</PrimaryLink>
+            <PrimaryLink to={`/${locale}/work`} variant="ghost">
+              {fr ? "Tous les cas clients" : "All case studies"}
+            </PrimaryLink>
+          </>
+        }
+        extra={<p className={styles.disclaimer}>{fr ? "Mission illustrative · résultats non vérifiés" : "Illustrative engagement · unverified results"}</p>}
+        visual={
+          <HubDiagram
+            seed={item.id.length}
+            rays={18}
+            rx={250}
+            ry={170}
+            nodes={detail.heroFacts.map(([value, label], i) => ({ id: `${value}-${label}`, value, label, angle: -60 + i * 60 }))}
+            renderNode={(node) => (
+              <div className={`${hubStyles.label} ${styles.fact}`}>
+                <strong>{node.value}</strong>
+                <span>{node.label}</span>
+              </div>
+            )}
+          />
+        }
+      />
+      <Section>
+        <div className={styles.challenge}>
+          <div data-reveal>
+            <RevealText as="h2" className={styles.h2}>
+              {fr ? "Le défi" : "The challenge"}
+            </RevealText>
+            <p className={styles.body}>{detail.challenge}</p>
+            <ul className={styles.bullets}>
+              {detail.challengePoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.glance} data-reveal style={{ "--i": 2 }}>
+            <Eyebrow>{fr ? "En un coup d’œil" : "At a glance"}</Eyebrow>
+            <ul>
+              {detail.glance.map(([icon, value, label, note]) => (
+                <li key={label}>
+                  <SystemIcon name={icon} size={24} strokeWidth={1.2} />
+                  <strong>
+                    <AnimatedCounter value={value} />
+                  </strong>
+                  <b>{label}</b>
+                  <span>{note}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Section>
+      <section className={styles.architecture}>
+        <PageContainer>
+          <RevealText as="h2" className={styles.h2}>
+            {fr ? "L’architecture" : "The architecture"}
+          </RevealText>
+          <ArchitectureMorph
+            detail={detail}
+            labels={{
+              before: fr ? "Avant" : "Before",
+              transform: fr ? "Transformation" : "Transformation",
+              after: fr ? "Après" : "After",
+              core: fr ? "SOCLE UNIQUE" : "SINGLE SOURCE",
+              aria: fr ? "Architecture avant et après la transformation" : "Architecture before and after the transformation",
+            }}
+          />
+        </PageContainer>
+      </section>
+      <Section>
+        <div className={styles.solution}>
+          <div>
+            <RevealText as="h2" className={styles.h2}>
+              {fr ? "La solution" : "The solution"}
+            </RevealText>
+            <p className={styles.body}>{detail.solutionIntro}</p>
+            <ul className={styles.features}>
+              {detail.features.map(([icon, text], index) => (
+                <li key={text} data-reveal style={{ "--i": index }}>
+                  <SystemIcon name={icon} size={22} strokeWidth={1.3} />
+                  {text}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.stack} data-reveal style={{ "--i": 2 }}>
+            <Eyebrow>{fr ? "Pile technologique" : "Technology stack"}</Eyebrow>
+            <div className={styles.stackGrid}>
+              <div className={styles.stackCore}>
+                <strong>NetSuite</strong>
+                <span>{fr ? "Socle ERP" : "Core ERP"}</span>
+              </div>
+              <ul>
+                {stack.map((platform) => (
+                  <li key={platform.id}>
+                    {platform.name}
+                    <span>{platform.category}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p className={styles.secure}>
+              <Lock size={14} strokeWidth={1.6} aria-hidden="true" />
+              {fr ? "Sûr. Évolutif. Connecté." : "Secure. Scalable. Connected."}
+            </p>
+          </div>
+        </div>
+      </Section>
+      <Section>
+        <div className={styles.outcome}>
+          <div>
+            <RevealText as="h2" className={styles.h2}>
+              {fr ? "Le résultat" : "The outcome"}
+            </RevealText>
+            <p className={styles.body}>{detail.outcomeIntro}</p>
+            <ul className={styles.outcomes}>
+              {detail.outcomes.map(([value, label], index) => (
+                <li key={label} data-reveal style={{ "--i": index }}>
+                  <strong>
+                    <AnimatedCounter value={value} />
+                  </strong>
+                  <span>{label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <figure className={styles.quote} data-reveal style={{ "--i": 3 }}>
+            <Quote size={34} strokeWidth={1.1} aria-hidden="true" />
+            <blockquote>{quote}</blockquote>
+            <figcaption>
+              <b>— {role}</b>
+              {org}
+              <em>{fr ? "Citation illustrative" : "Illustrative quote"}</em>
+            </figcaption>
+          </figure>
+        </div>
+      </Section>
+      {item.next && (
+        <Section>
+          <Link to={`/${locale}/work/${item.next.slug}`} className={styles.next}>
+            <div className={styles.nextMedia} data-reveal="image" aria-hidden="true">
+              <CaseVisual study={item.next} />
+            </div>
+            <div className={styles.nextCopy}>
+              <div className={styles.nextWave} aria-hidden="true">
+                <SignalWave shape="rise" strands={22} particles={90} />
+              </div>
+              <Eyebrow>{fr ? "Projet suivant" : "Next project"}</Eyebrow>
+              <h2>{item.next.name}</h2>
+              <p>{item.next.description}</p>
+              <span className={styles.nextCta}>
+                {fr ? "Voir le cas client" : "View case study"}
+                <ArrowRight size={15} strokeWidth={1.6} aria-hidden="true" />
+              </span>
+            </div>
+          </Link>
+        </Section>
+      )}
+      <CTASection
+        variant="band"
+        title={fr ? "Prêt à transformer vos opérations ?" : "Ready to transform your operations?"}
+        description={
+          fr
+            ? "Construisons une entreprise connectée, efficace et durablement performante."
+            : "Let’s build a connected enterprise that drives efficiency, growth and lasting impact."
+        }
+      />
+    </>
+  );
+}

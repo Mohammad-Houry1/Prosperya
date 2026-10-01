@@ -9,11 +9,14 @@ import {
   getCaseStudyBySlug,
 } from "../../src/repositories/caseStudies.repository.js";
 import { getPlatforms } from "../../src/repositories/platforms.repository.js";
-import { getInsights, getInsightBySlug } from "../../src/repositories/insights.repository.js";
+import {
+  getInsights,
+  getInsightBySlug,
+} from "../../src/repositories/insights.repository.js";
 
 test("expertise repository returns localized normalized capability models", async () => {
   const capabilities = await getCapabilities("fr");
-  assert.equal(capabilities.length, 4);
+  assert.equal(capabilities.length, 6);
   assert.equal(capabilities[0].title, "Transformer");
   assert.equal(typeof capabilities[0].description, "string");
   assert.equal("copy" in capabilities[0], false);

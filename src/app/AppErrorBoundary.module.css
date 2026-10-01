@@ -10,7 +10,7 @@
   max-width: 720px;
 }
 .wrap span {
-  color: var(--brand-primary);
+  color: var(--accent-text);
   font-size: 10px;
   letter-spacing: 0.15em;
   font-weight: 750;

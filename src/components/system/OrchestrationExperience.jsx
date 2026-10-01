@@ -1,45 +1,67 @@
-import { lazy, Suspense } from "react";
-import { useInViewport, useMediaQuery } from "@mantine/hooks";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "../../hooks/useReducedMotion.js";
+import { useMediaQuery } from "../../hooks/useMediaQuery.js";
 import { useWebGLSupport } from "../../hooks/useWebGLSupport.js";
-import { useLocale } from "../../i18n/LocaleContext.jsx";
 import SystemNetworkFallback from "./SystemNetworkFallback.jsx";
+import CanvasErrorBoundary from "./CanvasErrorBoundary.jsx";
 import styles from "./OrchestrationExperience.module.css";
 const OrchestrationCanvas = lazy(
   () => import("../../three/OrchestrationCanvas.jsx"),
 );
-export default function OrchestrationExperience({ orchestrated }) {
+
+/*
+  Chooses the renderer for the orchestration story: lazy WebGL on capable
+  desktops, the shared-geometry SVG elsewhere. Rendering pauses whenever the
+  stage is off-screen or the tab is hidden.
+*/
+export default function OrchestrationExperience({
+  progressRef,
+  viewRef,
+  layoutRef,
+}) {
   const reduced = useReducedMotion();
-  const small = useMediaQuery("(max-width: 760px)");
+  const small = useMediaQuery("(max-width: 980px)");
+  const phone = useMediaQuery("(max-width: 640px)");
   const webgl = useWebGLSupport();
-  const { ref, inViewport } = useInViewport();
-  const { locale } = useLocale();
-  const use3D = webgl && !reduced && !small;
-  const status = orchestrated
-    ? locale === "fr"
-      ? "SYSTÈME ORCHESTRÉ"
-      : "SYSTEM ORCHESTRATED"
-    : locale === "fr"
-      ? "ARCHITECTURE FRAGMENTÉE"
-      : "FRAGMENTED ARCHITECTURE";
+  const ref = useRef(null);
+  const [inView, setInView] = useState(true);
+  const [visible, setVisible] = useState(() => !document.hidden);
+  useEffect(() => {
+    const update = () => setVisible(!document.hidden);
+    document.addEventListener("visibilitychange", update);
+    if (typeof IntersectionObserver === "undefined") return () => document.removeEventListener("visibilitychange", update);
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting));
+    observer.observe(ref.current);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", update);
+    };
+  }, []);
+  const active = inView && visible;
+  const fallback = (
+    <SystemNetworkFallback
+      progressRef={progressRef}
+      active={active}
+      reduced={reduced}
+      compact={phone}
+    />
+  );
   return (
     <div ref={ref} className={styles.wrap}>
-      {use3D ? (
-        <Suspense
-          fallback={<SystemNetworkFallback orchestrated={orchestrated} />}
-        >
-          <OrchestrationCanvas
-            orchestrated={orchestrated}
-            active={inViewport}
-          />
-        </Suspense>
+      {webgl && !reduced && !small ? (
+        <CanvasErrorBoundary fallback={fallback}>
+          <Suspense fallback={fallback}>
+            <OrchestrationCanvas
+              progressRef={progressRef}
+              viewRef={viewRef}
+              layoutRef={layoutRef}
+              active={active}
+            />
+          </Suspense>
+        </CanvasErrorBoundary>
       ) : (
-        <SystemNetworkFallback orchestrated={orchestrated} />
+        fallback
       )}
-      <div className={styles.status}>
-        <i className={orchestrated ? styles.live : ""} />
-        {status}
-      </div>
     </div>
   );
 }

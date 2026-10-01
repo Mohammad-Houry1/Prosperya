@@ -20,7 +20,7 @@ export default function ErrorState({ title, description, onRetry }) {
   const copy = DEFAULT_COPY[locale] ?? DEFAULT_COPY.en;
 
   return (
-    <div className={styles.state}>
+    <div className={styles.state} role="alert">
       <AlertTriangle size={20} aria-hidden="true" />
       <h2>{title ?? copy.title}</h2>
       <p>{description ?? copy.description}</p>

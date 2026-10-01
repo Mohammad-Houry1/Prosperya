@@ -1,16 +1,25 @@
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
+
+let cachedSupport;
 
 export function useWebGLSupport() {
-  return useMemo(() => {
-    if (typeof document === "undefined") return false;
-    try {
-      const canvas = document.createElement("canvas");
-      return Boolean(
-        window.WebGLRenderingContext &&
-        (canvas.getContext("webgl2") || canvas.getContext("webgl")),
-      );
-    } catch {
-      return false;
+  const [supported, setSupported] = useState(false);
+  useEffect(() => {
+    if (cachedSupport === undefined) {
+      let context;
+      try {
+        context =
+          typeof window.WebGL2RenderingContext === "function"
+            ? document.createElement("canvas").getContext("webgl2")
+            : null;
+        cachedSupport = Boolean(context);
+      } catch {
+        cachedSupport = false;
+      } finally {
+        context?.getExtension("WEBGL_lose_context")?.loseContext();
+      }
     }
+    setSupported(cachedSupport);
   }, []);
+  return supported;
 }

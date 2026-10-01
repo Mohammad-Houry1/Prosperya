@@ -1,13 +1,7 @@
 .container {
-  width: min(calc(100% - 40px), var(--container));
+  width: min(calc(100% - 2 * var(--gutter)), var(--container));
   margin-inline: auto;
 }
 .narrow {
-  width: min(calc(100% - 40px), var(--container-narrow));
-}
-@media (max-width: 640px) {
-  .container,
-  .narrow {
-    width: min(calc(100% - 28px), var(--container));
-  }
+  width: min(calc(100% - 2 * var(--gutter)), var(--container-narrow));
 }
