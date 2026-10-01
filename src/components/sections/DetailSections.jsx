@@ -5,7 +5,6 @@ import Eyebrow from "../common/Eyebrow.jsx";
 import PrimaryLink from "../common/PrimaryLink.jsx";
 import ProcessPath from "../company/ProcessPath.jsx";
 import SystemIcon from "../system/SystemIcon.jsx";
-import HubDiagram, { hubStyles } from "../visuals/HubDiagram.jsx";
 import AnimatedCounter from "../../motion/components/AnimatedCounter.jsx";
 import styles from "./DetailSections.module.css";
 
@@ -93,13 +92,9 @@ function Metrics({ section }) {
   );
 }
 
+// The partner ecosystem as a grid of categories. Not a Hub: on the pages that
+// use this section, the Hero visual already carries the page's one Hub.
 function Ecosystem({ section }) {
-  const nodes = section.groups.map(([category, names], index) => ({
-    id: category,
-    category,
-    names,
-    angle: -90 + (index * 360) / section.groups.length,
-  }));
   return (
     <Section>
       <div className={styles.ecosystem}>
@@ -109,19 +104,14 @@ function Ecosystem({ section }) {
           <p>{section.text}</p>
         </div>
         <div>
-          <HubDiagram
-            nodes={nodes}
-            rx={262}
-            ry={186}
-            center="NetSuite"
-            compactLabels="keep"
-            renderNode={(node) => (
-              <div className={styles.platformNode}>
-                <span>{node.category}</span>
-                <b className={hubStyles.label}>{node.names.join(" · ")}</b>
-              </div>
-            )}
-          />
+          <ul className={styles.ecosystemGrid}>
+            {section.groups.map(([category, names], index) => (
+              <li key={category} data-reveal="card" style={{ "--i": index }}>
+                <span>{category}</span>
+                <b>{names.join(", ")}</b>
+              </li>
+            ))}
+          </ul>
           <p className={styles.footnote}>{section.footnote}</p>
         </div>
       </div>

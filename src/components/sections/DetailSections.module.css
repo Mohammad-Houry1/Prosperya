@@ -189,26 +189,35 @@
   color: var(--text-secondary);
   line-height: 1.65;
 }
-.platformNode {
+.ecosystemGrid {
   display: grid;
-  justify-items: center;
-  gap: 0.6em;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.platformNode > span {
+.ecosystemGrid li {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 16px 18px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+}
+.ecosystemGrid span {
   color: var(--accent-text);
-  font-size: 0.85em;
-  letter-spacing: 0.12em;
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
-.platformNode b {
-  font-size: 1.15em;
-  font-weight: 450;
-  letter-spacing: 0.01em;
-  text-transform: none;
+.ecosystemGrid b {
+  font-size: 15px;
+  font-weight: 400;
 }
 .footnote {
-  margin: 8px 0 0;
-  text-align: center;
+  margin: 14px 0 0;
   color: var(--text-secondary);
   font-size: 14px;
 }
@@ -488,6 +497,9 @@
   .ecosystem,
   .matrixLayout {
     grid-template-columns: minmax(0, 1fr);
+  }
+  .ecosystemGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .flow {
     grid-template-columns: minmax(0, 1fr);

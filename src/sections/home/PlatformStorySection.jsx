@@ -1,7 +1,7 @@
 import Section from "../../components/common/Section.jsx";
 import Eyebrow from "../../components/common/Eyebrow.jsx";
 import PrimaryLink from "../../components/common/PrimaryLink.jsx";
-import NetSuiteCoreDiagram from "../../components/visuals/NetSuiteCoreDiagram.jsx";
+import NetSuiteFoundation from "./NetSuiteFoundation.jsx";
 import { useLocale } from "../../i18n/LocaleContext.jsx";
 import styles from "./HomeSections.module.css";
 export default function PlatformStorySection() {
@@ -25,7 +25,7 @@ export default function PlatformStorySection() {
             {fr ? "Notre expertise NetSuite" : "Explore NetSuite expertise"}
           </PrimaryLink>
         </div>
-        <NetSuiteCoreDiagram />
+        <NetSuiteFoundation />
       </div>
     </Section>
   );

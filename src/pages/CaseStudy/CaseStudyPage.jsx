@@ -8,7 +8,6 @@ import Eyebrow from "../../components/common/Eyebrow.jsx";
 import CTASection from "../../components/common/CTASection.jsx";
 import CaseVisual from "../../components/case-study/CaseVisual.jsx";
 import ArchitectureMorph from "../../components/case-study/ArchitectureMorph.jsx";
-import HubDiagram, { hubStyles } from "../../components/visuals/HubDiagram.jsx";
 import SignalWave from "../../components/visuals/SignalWave.jsx";
 import SystemIcon from "../../components/system/SystemIcon.jsx";
 import RevealText from "../../motion/components/RevealText.jsx";
@@ -75,19 +74,21 @@ export default function CaseStudyPage() {
         }
         extra={<p className={styles.disclaimer}>{fr ? "Mission illustrative · résultats non vérifiés" : "Illustrative engagement · unverified results"}</p>}
         visual={
-          <HubDiagram
-            seed={item.id.length}
-            rays={18}
-            rx={250}
-            ry={170}
-            nodes={detail.heroFacts.map(([value, label], i) => ({ id: `${value}-${label}`, value, label, angle: -60 + i * 60 }))}
-            renderNode={(node) => (
-              <div className={`${hubStyles.label} ${styles.fact}`}>
-                <strong>{node.value}</strong>
-                <span>{node.label}</span>
-              </div>
-            )}
-          />
+          // The case's own cover with its headline facts. The page's one Hub
+          // is the "after" state of the architecture morph further down.
+          <figure className={styles.heroVisual}>
+            <div className={styles.heroMedia} data-reveal="image">
+              <CaseVisual study={item} priority sizes="(min-width: 900px) 50vw, 100vw" />
+            </div>
+            <dl className={styles.facts}>
+              {detail.heroFacts.map(([value, label]) => (
+                <div key={`${value}-${label}`}>
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
+          </figure>
         }
       />
       <Section>

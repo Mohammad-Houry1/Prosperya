@@ -25,13 +25,16 @@ const COPY = {
 };
 const sourceY = (i) => 60 + i * 46;
 const outcomeY = (i) => 64 + i * 52;
-const sourcePath = (i) => `M186 ${sourceY(i)} C262 ${sourceY(i)} 300 176 386 176`;
+// Each source keeps its own lane through the integration rail: a flow, not a Hub.
+const laneY = (i) => 116 + i * 24;
+const sourcePath = (i) => `M186 ${sourceY(i)} C280 ${sourceY(i)} 316 ${laneY(i)} 404 ${laneY(i)}`;
 const outcomePath = (i) => `M772 176 C808 176 802 ${outcomeY(i)} 838 ${outcomeY(i)}`;
 
 /*
   Architecture approach: the signal travels left to right — sources, the
   Prosperya integration layer, NetSuite, then outcomes. Each stage lights in
-  sequence when the diagram enters view; packets keep the flow alive.
+  sequence when the diagram enters view; packets run twice, then the diagram
+  holds still.
 */
 export default function ArchitectureFlowDiagram() {
   const { locale } = useLocale();
@@ -63,7 +66,7 @@ export default function ArchitectureFlowDiagram() {
             <circle cx="186" cy={sourceY(i)} r="2.6" />
             {!reduced && (
               <circle r="2.2" className={styles.packet}>
-                <animateMotion dur={`${2 + (i % 3) * 0.35}s`} repeatCount="indefinite" path={sourcePath(i)} />
+                <animateMotion dur={`${2 + (i % 3) * 0.35}s`} repeatCount="2" path={sourcePath(i)} />
               </circle>
             )}
           </g>
@@ -77,17 +80,18 @@ export default function ArchitectureFlowDiagram() {
           <text x="450" y="300" textAnchor="middle" dominantBaseline="central" className={styles.boxText}>
             {copy.events.toUpperCase()}
           </text>
-          <path d="M450 68 L450 112 M450 240 L450 284" className={styles.dotted} />
-          <circle cx="450" cy="176" r="86" className={styles.halo} />
-          <circle cx="450" cy="176" r="64" className={styles.hub} />
-          <path transform="translate(428 154) scale(0.88)" d="M3 5 47 18 21 24 8 46 13 22ZM23 25 47 18 23 40Z" className={styles.mark} />
+          <path d="M450 68 L450 96 M450 256 L450 284" className={styles.dotted} />
+          <rect x="404" y="96" width="92" height="160" rx="6" className={styles.rail} />
+          {copy.sources.map((name, i) => (
+            <line key={name} x1="404" x2="496" y1={laneY(i)} y2={laneY(i)} className={styles.lane} />
+          ))}
         </g>
         <g className={styles.flow} style={{ "--i": 0, "--d": "750ms" }}>
-          <path d="M514 176 L622 176" pathLength="1" />
+          <path d="M496 176 L622 176" pathLength="1" />
           <circle cx="622" cy="176" r="3" />
           {!reduced && (
             <circle r="2.4" className={styles.packet}>
-              <animateMotion dur="1.6s" repeatCount="indefinite" path="M514 176 L622 176" />
+              <animateMotion dur="1.6s" repeatCount="2" path="M496 176 L622 176" />
             </circle>
           )}
         </g>
