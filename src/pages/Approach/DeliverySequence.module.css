@@ -3,7 +3,8 @@
 }
 /* Pinned: ~0.55 viewport of scroll per stage. */
 .pinned {
-  height: calc(100svh + var(--stages) * 55svh);
+  /* 7 stages × 32svh: about 2.25 screens of pinned scroll (ADR 0001). */
+  height: calc(100svh + var(--stages) * 32svh);
 }
 .stage {
   padding-block: var(--section-space);

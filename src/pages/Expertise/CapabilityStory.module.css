@@ -61,8 +61,9 @@
   padding: 0;
   list-style: none;
 }
+/* Four chapters of 56svh: about 2.25 screens of held scroll (ADR 0001). */
 .step {
-  min-height: 86svh;
+  min-height: 56svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -137,24 +138,21 @@
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
   }
-  /* Phones: heading in flow, only the visual sticks while chapters pass beneath. */
+  /* Phones: no pin. Heading, visual and chapters simply follow each other. */
   .aside,
   .sticky {
     display: contents;
   }
   .visual {
-    position: sticky;
-    top: var(--header-height);
-    z-index: 2;
     padding: 10px 0 18px;
-    background: linear-gradient(var(--bg-primary) 88%, transparent);
   }
   .progress {
     display: none;
   }
   .step {
-    min-height: 62svh;
-    padding-block: 32px;
+    min-height: 0;
+    padding-block: 28px;
+    opacity: 1;
   }
   .step h3 {
     font-size: clamp(44px, 13vw, 72px);
