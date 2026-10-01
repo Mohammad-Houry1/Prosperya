@@ -42,7 +42,7 @@ export default function SolutionProof({ solutions, studies, locale }) {
           const study = byId[solution.caseStudyId];
           const [lead] = study.metrics;
           return (
-            <article key={solution.id} className={styles.card} data-reveal style={{ "--i": index }}>
+            <article key={solution.id} className={styles.card} data-reveal="card" style={{ "--i": index }}>
               <div className={styles.media} aria-hidden="true">
                 <CaseVisual study={study} sizes="320px" />
               </div>

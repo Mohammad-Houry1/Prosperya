@@ -54,7 +54,7 @@ export default function ContactPage() {
     }
     submission.mutate(payload);
   };
-  const renderField = (field, index) => {
+  const renderField = (field) => {
     const attributes = {
       id: field.name,
       name: field.name,
@@ -68,8 +68,6 @@ export default function ContactPage() {
       <div
         className={`${styles.field} ${field.multiline ? styles.wide : ""}`}
         key={field.name}
-        data-reveal
-        style={{ "--i": index + 2 }}
       >
         <label htmlFor={field.name}>
           {field.label[locale] ?? field.label.en}
@@ -120,20 +118,20 @@ export default function ContactPage() {
       <Section className={styles.contactSection}>
         <div className={styles.layout}>
           <div className={styles.intro}>
-            <p className={styles.eyebrow} data-reveal>
+            <p className={styles.eyebrow}>
               {fr ? "Démarrer un projet" : "Start a project"}
             </p>
             <RevealText as="h1" onLoad key={locale}>
               {fr ? "Architecturons la suite." : "Let’s architect what comes next."}
             </RevealText>
-            <p className={styles.lead} data-reveal style={{ "--i": 2 }}>
+            <p className={styles.lead}>
               {fr
                 ? "Dites-nous où vous en êtes, ce que vous voulez atteindre et les contraintes qui comptent."
                 : "Tell us where you are today, what you want to achieve and the constraints that matter."}
             </p>
             <ol className={styles.steps}>
               {steps.map(([title, text], index) => (
-                <li key={title} data-reveal style={{ "--i": index + 3 }}>
+                <li key={title}>
                   <span className={styles.stepIndex}>{String(index + 1).padStart(2, "0")}</span>
                   <div>
                     <strong>{title}</strong>
@@ -142,7 +140,7 @@ export default function ContactPage() {
                 </li>
               ))}
             </ol>
-            <p className={styles.notice} data-reveal style={{ "--i": 6 }}>
+            <p className={styles.notice}>
               <ShieldCheck size={16} strokeWidth={1.5} aria-hidden="true" />
               {fr
                 ? "Formulaire de démonstration : vous pouvez vérifier votre brief, mais aucun message n’est envoyé ni enregistré."

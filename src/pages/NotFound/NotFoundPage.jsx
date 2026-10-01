@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useDocumentMeta } from "../../hooks/useDocumentMeta.js";
 import PageContainer from "../../components/common/PageContainer.jsx";
 import PrimaryLink from "../../components/common/PrimaryLink.jsx";
+import RevealText from "../../motion/components/RevealText.jsx";
 import HubDiagram, { hubStyles } from "../../components/visuals/HubDiagram.jsx";
 import { useLocale } from "../../i18n/LocaleContext.jsx";
 import styles from "./NotFoundPage.module.css";
@@ -27,18 +28,18 @@ export default function NotFoundPage() {
     <PageContainer>
       <div className={styles.page}>
         <div className={styles.copy}>
-          <p className={styles.code} data-reveal>
+          <p className={styles.code}>
             404
           </p>
-          <h1 data-reveal style={{ "--i": 1 }}>
+          <RevealText as="h1" onLoad>
             {fr ? "Ce lien ne mène nulle part." : "This connection leads nowhere."}
-          </h1>
-          <p data-reveal style={{ "--i": 2 }}>
+          </RevealText>
+          <p>
             {fr
               ? "La page a peut-être été déplacée. Le reste du système fonctionne — choisissez une destination."
               : "The page may have moved. The rest of the system is running — pick a destination."}
           </p>
-          <div data-reveal style={{ "--i": 3 }}>
+          <div>
             <PrimaryLink to={`/${locale}`}>{fr ? "Retour à l’accueil" : "Return home"}</PrimaryLink>
           </div>
         </div>

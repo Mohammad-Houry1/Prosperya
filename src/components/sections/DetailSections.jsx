@@ -29,7 +29,7 @@ function Services({ section }) {
       <SectionHeader eyebrow={section.eyebrow} title={section.title} />
       <div className={`${styles.services} ${section.layout === "row" ? styles.row : ""}`}>
         {section.items.map(([icon, title, text], index) => (
-          <article key={title} className={styles.service} data-reveal style={{ "--i": index }}>
+          <article key={title} className={styles.service} data-reveal="card" style={{ "--i": index }}>
             <SystemIcon name={icon} size={24} strokeWidth={1.3} />
             <h3>{title}</h3>
             <p>{text}</p>
@@ -42,7 +42,7 @@ function Services({ section }) {
 
 function Flow({ section }) {
   const state = (block, future) => (
-    <div className={`${styles.stateBox} ${future ? styles.future : ""}`} data-reveal style={{ "--i": future ? 8 : 0 }}>
+    <div className={`${styles.stateBox} ${future ? styles.future : ""}`} data-reveal="card" style={{ "--i": future ? 8 : 0 }}>
       <strong>{block.title}</strong>
       <ul>
         {block.items.map((item) => (
@@ -78,7 +78,7 @@ function Metrics({ section }) {
       <SectionHeader eyebrow={section.eyebrow} title={section.title} />
       <div className={styles.metrics} style={{ "--count": section.items.length }}>
         {section.items.map(([value, label, unit], index) => (
-          <div key={label} className={styles.metric} data-reveal style={{ "--i": index }}>
+          <div key={label} className={styles.metric} data-reveal="card" style={{ "--i": index }}>
             <strong>
               <AnimatedCounter value={value} />
               {unit && <small>{unit}</small>}
@@ -98,7 +98,7 @@ function Ecosystem({ section }) {
   return (
     <Section>
       <div className={styles.ecosystem}>
-        <div className={styles.ecosystemCopy} data-reveal>
+        <div className={styles.ecosystemCopy}>
           <Eyebrow>{section.eyebrow}</Eyebrow>
           <h2>{section.title}</h2>
           <p>{section.text}</p>
@@ -123,7 +123,7 @@ function Outcomes({ section, locale }) {
   return (
     <Section className={styles.tinted}>
       <div className={styles.outcomes}>
-        <div className={styles.outcomesCopy} data-reveal>
+        <div className={styles.outcomesCopy}>
           <Eyebrow>{section.eyebrow}</Eyebrow>
           <h2>{section.title}</h2>
           <p>{section.text}</p>
@@ -135,7 +135,7 @@ function Outcomes({ section, locale }) {
         </div>
         <div className={styles.outcomeCards}>
           {section.items.map(([icon, value, label, text], index) => (
-            <article key={label} className={styles.outcome} data-reveal style={{ "--i": index }}>
+            <article key={label} className={styles.outcome} data-reveal="card" style={{ "--i": index }}>
               <SystemIcon name={icon} size={22} strokeWidth={1.3} />
               <strong>
                 <AnimatedCounter value={value} />
@@ -153,7 +153,7 @@ function Outcomes({ section, locale }) {
 
 function Comparison({ section }) {
   const panel = (block, automated) => (
-    <div className={`${styles.panel} ${automated ? styles.automated : ""}`} data-reveal style={{ "--i": automated ? 2 : 0 }}>
+    <div className={`${styles.panel} ${automated ? styles.automated : ""}`} data-reveal="card" style={{ "--i": automated ? 2 : 0 }}>
       <span className={styles.panelTitle}>{block.title}</span>
       <ol>
         {automated && <li className={styles.pulse} aria-hidden="true" />}
@@ -184,7 +184,7 @@ function Matrix({ section }) {
   return (
     <Section>
       <div className={styles.matrixLayout}>
-        <div className={styles.outcomesCopy} data-reveal>
+        <div className={styles.outcomesCopy}>
           <Eyebrow>{section.eyebrow}</Eyebrow>
           <h2>{section.title}</h2>
           <p>{section.text}</p>
@@ -222,7 +222,7 @@ function Signals({ section }) {
       <SectionHeader eyebrow={section.eyebrow} title={section.title} />
       <ol className={styles.signals}>
         {section.items.map(([title, text], index) => (
-          <li key={title} data-reveal style={{ "--i": index }}>
+          <li key={title}>
             <TriangleAlert size={18} strokeWidth={1.5} aria-hidden="true" />
             <span>{String(index + 1).padStart(2, "0")}</span>
             <h3>{title}</h3>

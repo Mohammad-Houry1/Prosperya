@@ -48,7 +48,7 @@ export default function AboutPage() {
       <section className={styles.hero}>
         <PageContainer className={styles.heroGrid}>
           <div>
-            <div data-reveal>
+            <div>
               <Eyebrow>{copy.eyebrow}</Eyebrow>
             </div>
             <RevealText as="h1" onLoad className={styles.title}>
@@ -56,10 +56,10 @@ export default function AboutPage() {
                 <span key={line}>{line}</span>
               ))}
             </RevealText>
-            <p className={styles.lead} data-reveal style={{ "--i": 4 }}>
+            <p className={styles.lead}>
               {copy.lead}
             </p>
-            <div className={styles.actions} data-reveal style={{ "--i": 5 }}>
+            <div className={styles.actions}>
               <PrimaryLink to={`/${locale}/contact`}>{fr ? "Démarrer une conversation" : "Start a conversation"}</PrimaryLink>
               <PrimaryLink to={`/${locale}/approach`} variant="ghost">
                 {fr ? "Notre approche" : "Our approach"}
@@ -90,13 +90,13 @@ export default function AboutPage() {
               {copy.storyTitle[0]} <br />
               {copy.storyTitle[1]}
             </RevealText>
-            {copy.story.map((paragraph, index) => (
-              <p key={paragraph} className={styles.paragraph} data-reveal style={{ "--i": index }}>
+            {copy.story.map((paragraph) => (
+              <p key={paragraph} className={styles.paragraph}>
                 {paragraph}
               </p>
             ))}
           </div>
-          <dl className={styles.facts} data-reveal style={{ "--i": 2 }}>
+          <dl className={styles.facts} data-reveal="card" style={{ "--i": 2 }}>
             {copy.facts.map(([icon, label, value]) => (
               <div key={label}>
                 <SystemIcon name={icon} size={22} strokeWidth={1.3} />
@@ -114,7 +114,7 @@ export default function AboutPage() {
             <div className={styles.monogram} aria-hidden="true" data-reveal="scale">
               <span>{leader.initials}</span>
             </div>
-            <div className={styles.leaderCopy} data-reveal style={{ "--i": 1 }}>
+            <div className={styles.leaderCopy}>
               <h2>{leader.name}</h2>
               <p className={styles.role}>{leader.role}</p>
               <p>{leader.bio}</p>
@@ -125,7 +125,7 @@ export default function AboutPage() {
                 </a>
               )}
             </div>
-            <div className={styles.focus} data-reveal style={{ "--i": 2 }}>
+            <div className={styles.focus} data-reveal="card" style={{ "--i": 2 }}>
               <span>{copy.focusTitle}</span>
               <ul>
                 {copy.focus.map(([icon, label]) => (
@@ -144,8 +144,8 @@ export default function AboutPage() {
       <Section>
         <Eyebrow>{copy.principlesEyebrow}</Eyebrow>
         <ul className={styles.principles}>
-          {copy.principles.map(([icon, title, text], index) => (
-            <li key={title} data-reveal style={{ "--i": index }}>
+          {copy.principles.map(([icon, title, text]) => (
+            <li key={title}>
               <SystemIcon name={icon} size={24} strokeWidth={1.2} />
               <strong>{title}</strong>
               <span>{text}</span>
@@ -159,7 +159,7 @@ export default function AboutPage() {
             <Eyebrow>{copy.platformsEyebrow}</Eyebrow>
             <ul className={styles.wordmarks}>
               {(platforms.data ?? []).map((platform, index) => (
-                <li key={platform.id} data-reveal style={{ "--i": index }}>
+                <li key={platform.id} data-reveal="card" style={{ "--i": index }}>
                   {platform.name}
                   <span>{platform.category}</span>
                 </li>
@@ -179,7 +179,7 @@ export default function AboutPage() {
       </Section>
       <Section>
         <div className={styles.how}>
-          <div data-reveal>
+          <div>
             <Eyebrow>{copy.howEyebrow}</Eyebrow>
             <h2 className={styles.h2}>
               {copy.howTitle[0]} <br />

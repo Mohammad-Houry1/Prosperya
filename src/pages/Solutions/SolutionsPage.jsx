@@ -65,7 +65,7 @@ export default function SolutionsPage() {
       <section className={styles.solutions} aria-labelledby="solutions-heading">
         <div className={styles.panel}>
           <div className={styles.sticky}>
-            <h2 id="solutions-heading" data-reveal>
+            <h2 id="solutions-heading">
               {fr ? "Des solutions de bout en bout." : "End‑to‑end solutions."}
               <span>{fr ? "Pensées pour vos résultats." : "Built around your business outcomes."}</span>
             </h2>
@@ -80,7 +80,7 @@ export default function SolutionsPage() {
       </section>
       <section className={styles.architecture}>
         <div className={styles.panel}>
-          <div className={styles.sticky} data-reveal>
+          <div className={styles.sticky}>
             <h2>{fr ? "Une architecture connectée qui grandit avec vous." : "Built on a connected architecture that scales with you."}</h2>
             <p>
               {fr

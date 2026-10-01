@@ -11,7 +11,7 @@ export default function CapabilityIndex({ items, locale }) {
   return (
     <ol className={styles.index}>
       {items.map((item, index) => (
-        <li key={item.id} className={styles.row} data-reveal style={{ "--i": index + 2 }}>
+        <li key={item.id} className={styles.row} data-reveal="card" style={{ "--i": index + 2 }}>
           <Link to={`/${locale}/expertise/${item.slug}`} className={styles.link}>
             <span className={styles.number}>{item.number ?? String(index + 1).padStart(2, "0")}</span>
             <span className={styles.text}>

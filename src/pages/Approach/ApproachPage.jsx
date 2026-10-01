@@ -76,7 +76,7 @@ export default function ApproachPage() {
       <ApproachHero locale={locale} />
       <DeliverySequence steps={process.data ?? []} locale={locale} />
       <div className={styles.loopWrap}>
-        <p className={styles.loop} data-reveal>
+        <p className={styles.loop}>
           <Loop size={34} strokeWidth={1.2} aria-hidden="true" />
           {copy.loop}
         </p>
@@ -85,7 +85,7 @@ export default function ApproachPage() {
         <SectionHeader eyebrow={copy.howEyebrow} title={copy.howTitle} />
         <div className={styles.practices}>
           {copy.practices.map(([icon, title, text, points], index) => (
-            <article key={title} className={styles.practice} data-reveal style={{ "--i": index }}>
+            <article key={title} className={styles.practice} data-reveal="card" style={{ "--i": index }}>
               <SystemIcon name={icon} size={26} strokeWidth={1.2} />
               <div>
                 <h3>
@@ -106,7 +106,7 @@ export default function ApproachPage() {
       <Section>
         <div className={styles.split}>
           <div className={styles.collab}>
-            <div data-reveal>
+            <div>
               <Eyebrow>{copy.collabEyebrow}</Eyebrow>
               <h2>{copy.collabTitle}</h2>
               <ul>
@@ -120,7 +120,7 @@ export default function ApproachPage() {
             </div>
             <CollaborationVenn nodes={copy.collabNodes} />
           </div>
-          <div className={styles.principles} data-reveal style={{ "--i": 2 }}>
+          <div className={styles.principles}>
             <Eyebrow>{copy.principlesEyebrow}</Eyebrow>
             <h2>{copy.principlesTitle}</h2>
             <ul>

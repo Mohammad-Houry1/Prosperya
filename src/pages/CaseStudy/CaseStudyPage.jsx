@@ -92,7 +92,7 @@ export default function CaseStudyPage() {
       />
       <Section>
         <div className={styles.challenge}>
-          <div data-reveal>
+          <div>
             <RevealText as="h2" className={styles.h2}>
               {fr ? "Le défi" : "The challenge"}
             </RevealText>
@@ -103,7 +103,7 @@ export default function CaseStudyPage() {
               ))}
             </ul>
           </div>
-          <div className={styles.glance} data-reveal style={{ "--i": 2 }}>
+          <div className={styles.glance} data-reveal="card" style={{ "--i": 2 }}>
             <Eyebrow>{fr ? "En un coup d’œil" : "At a glance"}</Eyebrow>
             <ul>
               {detail.glance.map(([icon, value, label, note]) => (
@@ -145,15 +145,15 @@ export default function CaseStudyPage() {
             </RevealText>
             <p className={styles.body}>{detail.solutionIntro}</p>
             <ul className={styles.features}>
-              {detail.features.map(([icon, text], index) => (
-                <li key={text} data-reveal style={{ "--i": index }}>
+              {detail.features.map(([icon, text]) => (
+                <li key={text}>
                   <SystemIcon name={icon} size={22} strokeWidth={1.3} />
                   {text}
                 </li>
               ))}
             </ul>
           </div>
-          <div className={styles.stack} data-reveal style={{ "--i": 2 }}>
+          <div className={styles.stack} data-reveal="card" style={{ "--i": 2 }}>
             <Eyebrow>{fr ? "Pile technologique" : "Technology stack"}</Eyebrow>
             <div className={styles.stackGrid}>
               <div className={styles.stackCore}>
@@ -184,8 +184,8 @@ export default function CaseStudyPage() {
             </RevealText>
             <p className={styles.body}>{detail.outcomeIntro}</p>
             <ul className={styles.outcomes}>
-              {detail.outcomes.map(([value, label], index) => (
-                <li key={label} data-reveal style={{ "--i": index }}>
+              {detail.outcomes.map(([value, label]) => (
+                <li key={label}>
                   <strong>
                     <AnimatedCounter value={value} />
                   </strong>
@@ -194,7 +194,7 @@ export default function CaseStudyPage() {
               ))}
             </ul>
           </div>
-          <figure className={styles.quote} data-reveal style={{ "--i": 3 }}>
+          <figure className={styles.quote} data-reveal="card" style={{ "--i": 3 }}>
             <Quote size={34} strokeWidth={1.1} aria-hidden="true" />
             <blockquote>{quote}</blockquote>
             <figcaption>

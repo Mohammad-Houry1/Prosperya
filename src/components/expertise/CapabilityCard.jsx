@@ -8,7 +8,7 @@ export default function CapabilityCard({ capability, locale, index = 0, heading 
   return (
     <article
       className={`${styles.card} ${heading === "detail" ? styles.detail : ""}`}
-      data-reveal
+      data-reveal="card"
       style={{ "--i": index }}
     >
       <span className={styles.icon}>

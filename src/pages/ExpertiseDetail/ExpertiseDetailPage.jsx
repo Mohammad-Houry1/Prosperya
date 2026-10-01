@@ -79,7 +79,7 @@ function DetailHero({ item, detail, locale }) {
         below={
           detail.keyOutcomes && (
             <div className={styles.keyOutcomesWrap}>
-              <div className={styles.keyOutcomes} data-reveal style={{ "--i": 6 }}>
+              <div className={styles.keyOutcomes} data-reveal="card" style={{ "--i": 6 }}>
                 <span>{detail.keyOutcomesLabel}</span>
                 <ul>
                   {detail.keyOutcomes.map(([icon, label]) => (
@@ -154,7 +154,7 @@ export default function ExpertiseDetailPage() {
         />
         <ul className={styles.related}>
           {related.map((other, index) => (
-            <li key={other.id} data-reveal style={{ "--i": index }}>
+            <li key={other.id} data-reveal="card" style={{ "--i": index }}>
               <Link to={`/${locale}/expertise/${other.slug}`}>
                 <SystemIcon name={other.icon} size={20} strokeWidth={1.4} />
                 <strong>{other.detailTitle}</strong>

@@ -53,7 +53,7 @@ export default function Testimonials({ variant = "feature" }) {
         </div>
         <div ref={carousel.ref} className={styles.rail} tabIndex={0} role="region" aria-label={label}>
           {items.map((item, i) => (
-            <figure key={item.id} className={styles.quoteCard} data-reveal style={{ "--i": i }}>
+            <figure key={item.id} className={styles.quoteCard} data-reveal="card" style={{ "--i": i }}>
               <Quote size={26} strokeWidth={1.2} aria-hidden="true" />
               <blockquote>{item.quote}</blockquote>
               <figcaption>

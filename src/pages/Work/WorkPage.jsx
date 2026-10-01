@@ -117,10 +117,10 @@ export default function WorkPage() {
       </PageContainer>
       <Section>
         <div className={styles.band}>
-          <h2 data-reveal>{fr ? "Sur ces missions. Mesuré par l’impact." : "Across these engagements. Measured by impact."}</h2>
+          <h2>{fr ? "Sur ces missions. Mesuré par l’impact." : "Across these engagements. Measured by impact."}</h2>
           <ul>
             {stats.map((metric, index) => (
-              <li key={`${metric.id}-${index}`} data-reveal style={{ "--i": index }}>
+              <li key={`${metric.id}-${index}`}>
                 <SystemIcon name={METRIC_ICONS[metric.id]} size={28} strokeWidth={1.2} />
                 <strong>
                   <AnimatedCounter value={metric.value} />

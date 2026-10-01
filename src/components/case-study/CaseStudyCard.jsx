@@ -5,7 +5,7 @@ import AnimatedCounter from "../../motion/components/AnimatedCounter.jsx";
 import styles from "./CaseStudyCard.module.css";
 export default function CaseStudyCard({ study, locale, index = 0 }) {
   return (
-    <article className={styles.card} data-reveal style={{ "--i": index }}>
+    <article className={styles.card} data-reveal="card" style={{ "--i": index }}>
       <div className={styles.media} aria-hidden="true">
         <CaseVisual study={study} />
       </div>

@@ -27,7 +27,7 @@ export default function PageHero({
       <PageContainer className={styles.inner}>
         <div className={styles.copy}>
           {breadcrumb && (
-            <nav aria-label="Breadcrumb" className={styles.breadcrumb} data-reveal>
+            <nav aria-label="Breadcrumb" className={styles.breadcrumb}>
               <ol>
                 {breadcrumb.map((item) => (
                   <li key={item.label}>
@@ -38,7 +38,7 @@ export default function PageHero({
             </nav>
           )}
           {eyebrow && (
-            <div data-reveal style={{ "--i": 1 }}>
+            <div>
               <Eyebrow>{eyebrow}</Eyebrow>
             </div>
           )}
@@ -46,17 +46,17 @@ export default function PageHero({
             {title}
           </RevealText>
           {lead && (
-            <div className={styles.lead} data-reveal style={{ "--i": 3 }}>
+            <div className={styles.lead}>
               {lead}
             </div>
           )}
           {actions && (
-            <div className={styles.actions} data-reveal style={{ "--i": 4 }}>
+            <div className={styles.actions}>
               {actions}
             </div>
           )}
           {extra && (
-            <div className={styles.extra} data-reveal style={{ "--i": 5 }}>
+            <div className={styles.extra}>
               {extra}
             </div>
           )}

@@ -10,7 +10,7 @@ export default function CapabilitiesSection() {
   const { data = [], isLoading, isError, refetch } = useCapabilities(locale);
   return (
     <Section className={styles.whatWeDo}>
-      <h2 className={styles.kicker} data-reveal>
+      <h2 className={styles.kicker}>
         {locale === "fr" ? "Ce que nous faisons" : "What we do"}
       </h2>
       {isLoading ? (

@@ -16,8 +16,6 @@ export default function ProcessPath({ steps, variant = "line" }) {
         <li
           key={step.id ?? step.title}
           className={styles.step}
-          data-reveal
-          style={{ "--i": index + 2 }}
         >
           <span className={styles.marker}>
             {step.icon ? (

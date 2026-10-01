@@ -1,6 +1,8 @@
 /*
-  Section-level reveal vocabulary. Elements opt in with data-reveal; the
-  RevealObserver (src/motion/RevealObserver.jsx) sets data-inview once.
+  Entrance reveals, for cards and visuals only: text (headings, body copy,
+  form fields) never waits on a reveal (docs/adr/0001-no-repeat-rules.md).
+  Variants: "card" fades up, "image" unmasks, "fade", "scale", "line" draws.
+  useRevealObserver (src/motion/useRevealObserver.js) sets data-inview once.
   --i staggers siblings (70ms apart, capped) so groups never arrive at once.
 */
 [data-reveal] {

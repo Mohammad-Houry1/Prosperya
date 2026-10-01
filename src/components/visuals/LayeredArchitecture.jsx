@@ -31,7 +31,7 @@ export default function LayeredArchitecture() {
         <div
           key={name}
           className={`${styles.layer} ${index === 2 ? styles.platform : ""}`}
-          data-reveal
+          data-reveal="card"
           style={{ "--i": (layers.length - 1 - index) * 2 }}
         >
           <span className={styles.name}>{name}</span>

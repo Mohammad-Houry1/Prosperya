@@ -169,7 +169,7 @@ export default function ArchitectureMorph({ detail, labels }) {
           [labels.before, detail.beforeCaption, 0],
           [labels.after, detail.afterCaption, 1],
         ].map(([title, caption, p]) => (
-          <figure key={title} className={styles.panel} data-reveal>
+          <figure key={title} className={styles.panel} data-reveal="card">
             <figcaption>
               <span>{title}</span>
               {caption}

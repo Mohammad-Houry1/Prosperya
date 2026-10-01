@@ -37,7 +37,7 @@ export default function FrequentlyAskedQuestions({ topic = "general", layout = "
   return (
     <Section>
       <div className={`${styles.layout} ${styles[layout]}`}>
-        <div data-reveal>
+        <div>
           <Eyebrow>{fr ? "Questions fréquentes" : "Frequently asked questions"}</Eyebrow>
           <h2>
             {layout === "columns"

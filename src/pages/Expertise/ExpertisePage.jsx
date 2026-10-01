@@ -48,7 +48,7 @@ export default function ExpertisePage() {
       <CapabilityStory items={items.slice(0, 4)} locale={locale} />
       <Section>
         <div className={styles.architecture}>
-          <div className={styles.architectureCopy} data-reveal>
+          <div className={styles.architectureCopy}>
             <Eyebrow>{fr ? "Notre approche d’architecture" : "Our architecture approach"}</Eyebrow>
             <h2>
               {fr ? "Conçu pour connecter." : "Built to connect."}

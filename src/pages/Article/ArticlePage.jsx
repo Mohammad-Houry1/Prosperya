@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, CalendarDays, Clock3 } from "lucide-react";
 import ReadingProgress from "./ReadingProgress.jsx";
+import RevealText from "../../motion/components/RevealText.jsx";
 import styles from "./ArticlePage.module.css";
 import PageContainer from "../../components/common/PageContainer.jsx";
 import SectionHeader from "../../components/common/SectionHeader.jsx";
@@ -76,16 +77,16 @@ export default function ArticlePage() {
           <ArrowLeft size={15} strokeWidth={1.6} aria-hidden="true" />
           {fr ? "Toutes les analyses" : "All insights"}
         </Link>
-        <p className={styles.category} data-reveal>
+        <p className={styles.category}>
           {item.category}
         </p>
-        <h1 data-reveal style={{ "--i": 1 }}>
+        <RevealText as="h1" onLoad>
           {item.title}
-        </h1>
-        <p className={styles.dek} data-reveal style={{ "--i": 2 }}>
+        </RevealText>
+        <p className={styles.dek}>
           {item.excerpt}
         </p>
-        <p className={styles.meta} data-reveal style={{ "--i": 3 }}>
+        <p className={styles.meta}>
           <span>
             <CalendarDays size={14} strokeWidth={1.5} aria-hidden="true" />
             <time dateTime={item.publishedAt}>

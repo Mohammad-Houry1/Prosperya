@@ -39,7 +39,7 @@ export default function InsightCard({ insight, locale, featured = false, large =
             <CoverArt variant={insight.cover} seed={7} />
           )}
         </div>
-        <div className={styles.featuredCopy} data-reveal style={{ "--i": 2 }}>
+        <div className={styles.featuredCopy}>
           <span className={styles.category}>{insight.category}</span>
           <h3>{insight.title}</h3>
           <p>{insight.excerpt}</p>
@@ -53,7 +53,7 @@ export default function InsightCard({ insight, locale, featured = false, large =
       </article>
     );
   return (
-    <article className={`${styles.card} ${large ? styles.large : ""}`} data-reveal style={{ "--i": index }}>
+    <article className={`${styles.card} ${large ? styles.large : ""}`} data-reveal="card" style={{ "--i": index }}>
       <div className={styles.art} aria-hidden="true">
         <CoverArt variant={insight.cover} seed={insight.id.length * 3 + index} />
       </div>

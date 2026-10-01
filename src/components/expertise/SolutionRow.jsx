@@ -9,7 +9,7 @@ export default function SolutionRow({ solution, locale, index = 0 }) {
   const fr = locale === "fr";
   const to = `/${locale}/solutions/${solution.slug}`;
   return (
-    <article className={styles.row} data-reveal style={{ "--i": index }}>
+    <article className={styles.row} data-reveal="card" style={{ "--i": index }}>
       <div className={styles.identity}>
         <div className={styles.cover} aria-hidden="true">
           <CoverArt variant={solution.cover} seed={index * 11 + 5} />

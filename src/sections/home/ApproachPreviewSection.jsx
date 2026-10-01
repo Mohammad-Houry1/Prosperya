@@ -14,7 +14,7 @@ export default function ApproachPreviewSection() {
   return (
     <Section>
       <div className={styles.approach}>
-        <div className={styles.approachCopy} data-reveal>
+        <div className={styles.approachCopy}>
           <Eyebrow>{fr ? "Notre approche" : "Our approach"}</Eyebrow>
           <h2>{fr ? "Un chemin éprouvé vers la transformation." : "A proven path to transformation."}</h2>
           <PrimaryLink to={`/${locale}/approach`} variant="text">

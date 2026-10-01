@@ -94,15 +94,15 @@ export default function SolutionDetailPage() {
           <RevealText as="h2" className={styles.statementTitle}>
             {story.statement}
           </RevealText>
-          <p data-reveal>{story.lead}</p>
+          <p>{story.lead}</p>
         </PageContainer>
       </section>
       <Section>
         <div className={styles.friction}>
-          <h2 data-reveal>{story.frictionTitle}</h2>
+          <h2>{story.frictionTitle}</h2>
           <ol>
             {story.friction.map((line, index) => (
-              <li key={line} data-reveal style={{ "--i": index }}>
+              <li key={line}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 {line}
               </li>
@@ -116,7 +116,7 @@ export default function SolutionDetailPage() {
           title={fr ? "Des capacités concrètes. Des résultats visibles." : "Concrete capabilities. Visible outcomes."}
         />
         <div className={styles.changeGrid}>
-          <div className={styles.changeColumn} data-reveal>
+          <div className={styles.changeColumn} data-reveal="card">
             <span>{fr ? "Ce que nous mettons en place" : "What we put in place"}</span>
             <ul className={styles.checks}>
               {item.capabilities.map((capability) => (
@@ -127,7 +127,7 @@ export default function SolutionDetailPage() {
               ))}
             </ul>
           </div>
-          <div className={styles.changeColumn} data-reveal style={{ "--i": 2 }}>
+          <div className={styles.changeColumn} data-reveal="card" style={{ "--i": 2 }}>
             <span>{fr ? "Ce que vous obtenez" : "What you can expect"}</span>
             <ul className={styles.outcomes}>
               {item.outcomes.map(([icon, text]) => (
@@ -150,11 +150,11 @@ export default function SolutionDetailPage() {
             </div>
             <div className={styles.proofCopy}>
               <Eyebrow>{fr ? "En pratique" : "In practice"}</Eyebrow>
-              <h2 data-reveal>{proof.name}</h2>
-              <p data-reveal>{proof.title}</p>
+              <h2>{proof.name}</h2>
+              <p>{proof.title}</p>
               <dl className={styles.proofMetrics}>
-                {story.metrics.map(([value, label], index) => (
-                  <div key={label} data-reveal style={{ "--i": index + 1 }}>
+                {story.metrics.map(([value, label]) => (
+                  <div key={label}>
                     <dd>
                       <AnimatedCounter value={value} />
                     </dd>

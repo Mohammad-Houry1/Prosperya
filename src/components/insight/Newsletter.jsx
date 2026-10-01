@@ -14,7 +14,7 @@ export default function Newsletter() {
     setState(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "done" : "invalid");
   };
   return (
-    <div className={styles.newsletter} data-reveal>
+    <div className={styles.newsletter} data-reveal="card">
       <Mail size={44} strokeWidth={1} aria-hidden="true" />
       <div>
         <h2>{fr ? "Restez informé. Gardez une longueur d’avance." : "Stay informed. Stay ahead."}</h2>

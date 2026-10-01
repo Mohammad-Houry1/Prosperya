@@ -39,17 +39,17 @@ export default function ProjectFeature({ study, index, locale, capabilityNames =
         <span className={styles.bigIndex}>{String(index + 1).padStart(2, "0")}</span>
       </div>
       <div className={styles.body}>
-        <span className={styles.index} data-reveal>
+        <span className={styles.index}>
           <b>{String(index + 1).padStart(2, "0")}</b> / {study.category}
         </span>
-        <h3 data-reveal style={{ "--i": 1 }}>{study.name}</h3>
-        <p className={styles.statement} data-reveal style={{ "--i": 2 }}>
+        <h3>{study.name}</h3>
+        <p className={styles.statement}>
           {study.title}
         </p>
-        <p className={styles.description} data-reveal style={{ "--i": 3 }}>
+        <p className={styles.description}>
           {study.description}
         </p>
-        <dl className={styles.meta} data-reveal style={{ "--i": 4 }}>
+        <dl className={styles.meta}>
           {study.industryName && (
             <div>
               <dt>{fr ? "Secteur" : "Industry"}</dt>
@@ -65,7 +65,7 @@ export default function ProjectFeature({ study, index, locale, capabilityNames =
             <dd>{study.platformIds.map((id) => platformNames[id]).filter(Boolean).join(" · ")}</dd>
           </div>
         </dl>
-        <div className={styles.metrics} data-reveal style={{ "--i": 5 }}>
+        <div className={styles.metrics}>
           <div className={styles.lead}>
             <strong>
               <AnimatedCounter value={lead.value} />

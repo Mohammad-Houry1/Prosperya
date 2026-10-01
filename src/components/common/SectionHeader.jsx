@@ -11,7 +11,7 @@ export default function SectionHeader({
   as: Heading = "h2",
 }) {
   return (
-    <header className={`${styles.header} ${styles[align]}`} data-reveal>
+    <header className={`${styles.header} ${styles[align]}`}>
       <div className={styles.copy}>
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
         <Heading>{title}</Heading>

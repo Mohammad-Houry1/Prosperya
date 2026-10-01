@@ -10,7 +10,7 @@ export default function PlatformStorySection() {
   return (
     <Section>
       <div className={styles.platform}>
-        <div className={styles.platformCopy} data-reveal>
+        <div className={styles.platformCopy}>
           <Eyebrow>{fr ? "NetSuite au cœur" : "NetSuite at the core"}</Eyebrow>
           <h2>
             {fr ? "Construit autour de NetSuite." : "Built around NetSuite."}
