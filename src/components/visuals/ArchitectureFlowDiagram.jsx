@@ -33,8 +33,8 @@ const outcomePath = (i) => `M772 176 C808 176 802 ${outcomeY(i)} 838 ${outcomeY(
 /*
   Architecture approach: the signal travels left to right — sources, the
   Prosperya integration layer, NetSuite, then outcomes. Each stage lights in
-  sequence when the diagram enters view; packets run twice, then the diagram
-  holds still.
+  sequence when the diagram enters view; packets run twice along their
+  paths once the diagram is in view, fade out, and the diagram holds still.
 */
 export default function ArchitectureFlowDiagram() {
   const { locale } = useLocale();
@@ -65,9 +65,11 @@ export default function ArchitectureFlowDiagram() {
             <path d={sourcePath(i)} pathLength="1" />
             <circle cx="186" cy={sourceY(i)} r="2.6" />
             {!reduced && (
-              <circle r="2.2" className={styles.packet}>
-                <animateMotion dur={`${2 + (i % 3) * 0.35}s`} repeatCount="2" path={sourcePath(i)} />
-              </circle>
+              <circle
+                r="2.2"
+                className={styles.packet}
+                style={{ offsetPath: `path("${sourcePath(i)}")`, "--dur": `${2 + (i % 3) * 0.35}s` }}
+              />
             )}
           </g>
         ))}
@@ -90,9 +92,7 @@ export default function ArchitectureFlowDiagram() {
           <path d="M496 176 L622 176" pathLength="1" />
           <circle cx="622" cy="176" r="3" />
           {!reduced && (
-            <circle r="2.4" className={styles.packet}>
-              <animateMotion dur="1.6s" repeatCount="2" path="M496 176 L622 176" />
-            </circle>
+            <circle r="2.4" className={styles.packet} style={{ offsetPath: 'path("M496 176 L622 176")', "--dur": "1.6s" }} />
           )}
         </g>
         <g className={`${styles.stage} ${styles.s3}`}>

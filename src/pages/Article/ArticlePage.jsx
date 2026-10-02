@@ -130,7 +130,7 @@ export default function ArticlePage() {
         </Section>
       )}
       <Section>
-        <Newsletter />
+        <Newsletter article />
       </Section>
     </>
   );

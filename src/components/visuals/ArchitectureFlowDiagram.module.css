@@ -103,10 +103,28 @@
   transition: opacity 400ms ease;
   transition-delay: calc(var(--d) + var(--i) * 70ms);
 }
+/* Packets travel their path twice once the diagram is in view, then fade out. */
 .packet {
   fill: var(--accent-text);
   opacity: 0;
-  transition: opacity 500ms ease 1500ms;
+  offset-rotate: 0deg;
+}
+.wrap[data-inview] .packet {
+  animation: packet var(--dur) ease-in-out 1500ms 2 both;
+}
+@keyframes packet {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  12%,
+  88% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
 }
 .wrap[data-inview] .stage {
   opacity: 1;

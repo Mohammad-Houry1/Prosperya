@@ -61,9 +61,10 @@
   padding: 0;
   list-style: none;
 }
-/* Four chapters of 56svh: about 2.25 screens of held scroll (ADR 0001). */
+/* Four chapters of 76svh, minus the sticky panel's own height: about 2.25
+   screens of held scroll (ADR 0001). */
 .step {
-  min-height: 56svh;
+  min-height: 76svh;
   display: flex;
   flex-direction: column;
   justify-content: center;

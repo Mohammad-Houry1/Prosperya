@@ -49,7 +49,7 @@ export default function ClientCompanies({ still = false }) {
             }
           >
             {paused ? <Play size={14} strokeWidth={1.6} aria-hidden="true" /> : <Pause size={14} strokeWidth={1.6} aria-hidden="true" />}
-            {paused ? (fr ? "Lecture" : "Play") : "Pause"}
+            {paused ? (fr ? "Relancer" : "Play") : "Pause"}
           </button>
         )}
       </div>
