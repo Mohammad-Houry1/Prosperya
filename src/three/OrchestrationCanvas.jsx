@@ -21,7 +21,6 @@ export default function OrchestrationCanvas({
   viewRef,
   layoutRef,
   active = true,
-  hold = false,
 }) {
   const { theme } = useAppTheme();
   const dark = theme === "dark";
@@ -31,7 +30,7 @@ export default function OrchestrationCanvas({
       dpr={[1, 1.5]}
       camera={{ position: [0, 0, 10], fov: 42, near: 0.1, far: 60 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-      frameloop={hold ? "demand" : active ? "always" : "never"}
+      frameloop={active ? "always" : "never"}
     >
       <Suspense fallback={null}>
         <CameraRig viewRef={viewRef} layoutRef={layoutRef}>

@@ -4,13 +4,13 @@ Third pass completed 2026-09-19 against the ten supplied reference images. It re
 
 ## Art direction per page
 
-Each page has its own composition and motion idea; no two pages share a hero template. The no-repeat rules (docs/adr/0001-no-repeat-rules.md, GLOSSARY.md): every Hero fits one screen and never pins; a page shows the Hub at most once; at most one Pinned story per page, below the Hero, about 2.25 screens, none on phones; every Close has a still Wave and its own title; the Marquee runs on Home only, with a pause control.
+Each page has its own composition and motion idea; no two pages share a hero template. The no-repeat rules (docs/adr/0001-no-repeat-rules.md, GLOSSARY.md): every Hero fits one screen and never pins; a page shows the Hub at most once; at most one Pinned story per page, below the Hero, about 2.25 screens, none on phones; every Close has its own title (its Wave animates, by owner choice); the Marquee runs on Home only, with a pause button, and does not stop on hover.
 
 Shared motion: each Hero title rises line by line on load (GSAP SplitText); only cards and images fade up as they enter; headings and body text never wait on a reveal. Gestures: every horizontal scroller swipes on touch and trackpads and drags with the mouse (`src/motion/gestures.js`).
 
 | Page | Composition | Motion |
 | --- | --- | --- |
-| Home | One-screen Hero: claim beside the 3D Hub in a framed panel; client Marquee; "Built around NetSuite" as modules standing on one foundation (not a Hub); Close is the general band | The Hub settles once from fragmented to orchestrated on load (about 4s), then holds still; Marquee drifts left to right with a pause button; featured work becomes a swipe rail below 1100px |
+| Home | One-screen Hero: claim beside the 3D Hub in a framed panel; client Marquee; "Built around NetSuite" as modules standing on one foundation (not a Hub); Close is the general band | The Hub settles once from fragmented to orchestrated on load (about 4s), then drifts slowly while its systems pulse; Marquee drifts left to right with a pause button (hover does not stop it); featured work becomes a swipe rail below 1100px |
 | Expertise | Hero is a numbered capability index, then the pinned four-moves section (the page's one Hub), then the architecture as a left-to-right flow | Index rows draw in and fill on hover; four moves pin for about 2.25 screens (no pin on phones); flow packets run twice, then stop |
 | Expertise detail | One metaphor per capability (layered architecture, connection mesh, automation lanes, …) + key outcomes, typed CMS sections | Hero progress drives the scene |
 | Solutions | Stacked hero over a four-panel strip, one metaphor per function, editorial rows, then a function-by-function proof rail (each function with its case) | Panels curtain in; the focused panel widens and its metaphor resolves; proof rail drags/swipes with arrows |

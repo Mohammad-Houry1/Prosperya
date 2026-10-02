@@ -11,7 +11,8 @@ import styles from "./CompanyStories.module.css";
   The client marks. By default they form the Marquee (Home only): one endless
   strip drifting left to right, with a pause control (WCAG 2.2.2). Each half
   of the track holds the list twice so it outruns the viewport; the loop is
-  seamless at -50%. `still` lays the same marks out in a static row (About).
+  seamless at -50%. Hover does not stop it; only the button does. `still`
+  lays the same marks out in a static row (About).
 */
 export default function ClientCompanies({ still = false }) {
   const { locale } = useLocale();
@@ -31,7 +32,6 @@ export default function ClientCompanies({ still = false }) {
     </li>
   );
   const half = (copy) => <ul>{[0, 1].flatMap((round) => clients.map((client) => mark(client, `${copy}-${round}-${client.id}`)))}</ul>;
-  const label = fr ? "logos clients" : "client logos";
   return (
     <Section className={styles.clients}>
       <div className={styles.intro}>
@@ -42,7 +42,11 @@ export default function ClientCompanies({ still = false }) {
             type="button"
             className={styles.pause}
             onClick={() => setPaused(!paused)}
-            aria-label={`${paused ? (fr ? "Relancer les" : "Play") : fr ? "Mettre en pause les" : "Pause"} ${label}`}
+            aria-label={
+              paused
+                ? fr ? "Relancer les logos clients" : "Play client logos"
+                : fr ? "Mettre en pause les logos clients" : "Pause client logos"
+            }
           >
             {paused ? <Play size={14} strokeWidth={1.6} aria-hidden="true" /> : <Pause size={14} strokeWidth={1.6} aria-hidden="true" />}
             {paused ? (fr ? "Lecture" : "Play") : "Pause"}
