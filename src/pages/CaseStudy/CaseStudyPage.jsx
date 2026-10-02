@@ -5,11 +5,11 @@ import PageContainer from "../../components/common/PageContainer.jsx";
 import PrimaryLink from "../../components/common/PrimaryLink.jsx";
 import Section from "../../components/common/Section.jsx";
 import Eyebrow from "../../components/common/Eyebrow.jsx";
+import CTASection from "../../components/common/CTASection.jsx";
 import CaseVisual from "../../components/case-study/CaseVisual.jsx";
 import ArchitectureMorph from "../../components/case-study/ArchitectureMorph.jsx";
 import SignalWave from "../../components/visuals/SignalWave.jsx";
 import SystemIcon from "../../components/system/SystemIcon.jsx";
-import RevealText from "../../motion/components/RevealText.jsx";
 import AnimatedCounter from "../../motion/components/AnimatedCounter.jsx";
 import EmptyState from "../../components/feedback/EmptyState.jsx";
 import ErrorState from "../../components/feedback/ErrorState.jsx";
@@ -93,9 +93,9 @@ export default function CaseStudyPage() {
       <Section>
         <div className={styles.challenge}>
           <div>
-            <RevealText as="h2" className={styles.h2}>
+            <h2 className={styles.h2}>
               {fr ? "Le défi" : "The challenge"}
-            </RevealText>
+            </h2>
             <p className={styles.body}>{detail.challenge}</p>
             <ul className={styles.bullets}>
               {detail.challengePoints.map((point) => (
@@ -122,9 +122,9 @@ export default function CaseStudyPage() {
       </Section>
       <section className={styles.architecture}>
         <PageContainer>
-          <RevealText as="h2" className={styles.h2}>
+          <h2 className={styles.h2}>
             {fr ? "L’architecture" : "The architecture"}
-          </RevealText>
+          </h2>
           <ArchitectureMorph
             detail={detail}
             labels={{
@@ -140,9 +140,9 @@ export default function CaseStudyPage() {
       <Section>
         <div className={styles.solution}>
           <div>
-            <RevealText as="h2" className={styles.h2}>
+            <h2 className={styles.h2}>
               {fr ? "La solution" : "The solution"}
-            </RevealText>
+            </h2>
             <p className={styles.body}>{detail.solutionIntro}</p>
             <ul className={styles.features}>
               {detail.features.map(([icon, text]) => (
@@ -179,9 +179,9 @@ export default function CaseStudyPage() {
       <Section>
         <div className={styles.outcome}>
           <div>
-            <RevealText as="h2" className={styles.h2}>
+            <h2 className={styles.h2}>
               {fr ? "Le résultat" : "The outcome"}
-            </RevealText>
+            </h2>
             <p className={styles.body}>{detail.outcomeIntro}</p>
             <ul className={styles.outcomes}>
               {detail.outcomes.map(([value, label]) => (
@@ -226,14 +226,24 @@ export default function CaseStudyPage() {
             </div>
           </Link>
         )}
-        <p className={styles.contactLine}>
-          {fr ? "Un projet comparable en tête ?" : "Have a similar project in mind?"}
-          <Link to={`/${locale}/contact`}>
-            {fr ? "Parler à un architecte" : "Talk to an architect"}
-            <ArrowRight size={15} strokeWidth={1.6} aria-hidden="true" />
-          </Link>
-        </p>
+        {item.next && (
+          <p className={styles.contactLine}>
+            {fr ? "Un projet comparable en tête ?" : "Have a similar project in mind?"}
+            <Link to={`/${locale}/contact`}>
+              {fr ? "Parler à un architecte" : "Talk to an architect"}
+              <ArrowRight size={15} strokeWidth={1.6} aria-hidden="true" />
+            </Link>
+          </p>
+        )}
       </Section>
+      {/* Only case: no next case to show, so the Close is the full band with its Wave. */}
+      {!item.next && (
+        <CTASection
+          variant="card"
+          title={fr ? "Un projet comparable en tête ?" : "Have a similar project in mind?"}
+          description={fr ? "Parlez à un architecte de votre contexte." : "Talk it through with an architect."}
+        />
+      )}
     </>
   );
 }

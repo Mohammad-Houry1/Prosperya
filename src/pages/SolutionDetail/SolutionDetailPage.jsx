@@ -12,7 +12,6 @@ import CapabilityCard from "../../components/expertise/CapabilityCard.jsx";
 import CaseVisual from "../../components/case-study/CaseVisual.jsx";
 import SolutionMetaphor from "../../components/visuals/SolutionMetaphor.jsx";
 import SystemIcon from "../../components/system/SystemIcon.jsx";
-import RevealText from "../../motion/components/RevealText.jsx";
 import AnimatedCounter from "../../motion/components/AnimatedCounter.jsx";
 import EmptyState from "../../components/feedback/EmptyState.jsx";
 import ErrorState from "../../components/feedback/ErrorState.jsx";
@@ -91,9 +90,9 @@ export default function SolutionDetailPage() {
       <section className={styles.statement}>
         <PageContainer>
           <Eyebrow>{item.title}</Eyebrow>
-          <RevealText as="h2" className={styles.statementTitle}>
+          <h2 className={styles.statementTitle}>
             {story.statement}
-          </RevealText>
+          </h2>
           <p>{story.lead}</p>
         </PageContainer>
       </section>

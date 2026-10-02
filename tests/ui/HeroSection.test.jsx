@@ -35,16 +35,15 @@ async function renderHero(locale, matching = []) {
 }
 
 it.each([
-  ["en", /Complexity\.\s*Orchestrated\./, /Scroll to orchestrate/i],
-  ["fr", /Complexité\.\s*Orchestrée\./, /Faites défiler pour orchestrer/i],
+  ["en", /Complexity\.\s*Orchestrated\./, "One operating architecture", "Fragmented architecture"],
+  ["fr", /Complexité\.\s*Orchestrée\./, "Une architecture opérationnelle", "Architecture fragmentée"],
 ])(
-  "shows the completed story without a scroll requirement in %s with reduced motion",
-  async (locale, heading, hint) => {
+  "starts on the finished, orchestrated state in %s with reduced motion",
+  async (locale, heading, after, before) => {
     await renderHero(locale, ["(prefers-reduced-motion: reduce)"]);
-    expect(
-      screen.getByRole("heading", { level: 1, name: heading }),
-    ).toBeVisible();
-    expect(screen.queryByText(hint)).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: heading })).toBeVisible();
+    expect(screen.getByText(after)).toBeVisible();
+    expect(screen.getByText(before)).not.toBeVisible();
   },
 );
 

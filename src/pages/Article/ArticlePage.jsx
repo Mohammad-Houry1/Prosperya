@@ -130,7 +130,7 @@ export default function ArticlePage() {
         </Section>
       )}
       <Section>
-        <Newsletter article />
+        <Newsletter title={fr ? "Recevez la prochaine analyse." : "Get the next article first."} />
       </Section>
     </>
   );

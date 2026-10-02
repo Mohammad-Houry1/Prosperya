@@ -86,10 +86,10 @@ export default function AboutPage() {
         <div className={styles.story}>
           <div>
             <Eyebrow>{copy.storyEyebrow}</Eyebrow>
-            <RevealText as="h2" className={styles.h2}>
+            <h2 className={styles.h2}>
               {copy.storyTitle[0]} <br />
               {copy.storyTitle[1]}
-            </RevealText>
+            </h2>
             {copy.story.map((paragraph) => (
               <p key={paragraph} className={styles.paragraph}>
                 {paragraph}

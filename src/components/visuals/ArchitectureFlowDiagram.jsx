@@ -28,6 +28,7 @@ const outcomeY = (i) => 64 + i * 52;
 // Each source keeps its own lane through the integration rail: a flow, not a Hub.
 const laneY = (i) => 116 + i * 24;
 const sourcePath = (i) => `M186 ${sourceY(i)} C280 ${sourceY(i)} 316 ${laneY(i)} 404 ${laneY(i)}`;
+const RAIL_TO_PLATFORM = "M496 176 L622 176";
 const outcomePath = (i) => `M772 176 C808 176 802 ${outcomeY(i)} 838 ${outcomeY(i)}`;
 
 /*
@@ -89,10 +90,10 @@ export default function ArchitectureFlowDiagram() {
           ))}
         </g>
         <g className={styles.flow} style={{ "--i": 0, "--d": "750ms" }}>
-          <path d="M496 176 L622 176" pathLength="1" />
+          <path d={RAIL_TO_PLATFORM} pathLength="1" />
           <circle cx="622" cy="176" r="3" />
           {!reduced && (
-            <circle r="2.4" className={styles.packet} style={{ offsetPath: 'path("M496 176 L622 176")', "--dur": "1.6s" }} />
+            <circle r="2.4" className={styles.packet} style={{ offsetPath: `path("${RAIL_TO_PLATFORM}")`, "--dur": "1.6s" }} />
           )}
         </g>
         <g className={`${styles.stage} ${styles.s3}`}>

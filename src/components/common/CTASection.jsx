@@ -2,7 +2,6 @@ import PageContainer from "./PageContainer.jsx";
 import Eyebrow from "./Eyebrow.jsx";
 import PrimaryLink from "./PrimaryLink.jsx";
 import SignalWave from "../visuals/SignalWave.jsx";
-import RevealText from "../../motion/components/RevealText.jsx";
 import { useLocale } from "../../i18n/LocaleContext.jsx";
 import styles from "./CTASection.module.css";
 
@@ -26,12 +25,12 @@ export default function CTASection({
   const copy = (
     <>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <RevealText as="h2" className={styles.title}>
+      <h2 className={styles.title}>
         {title ??
           (fr
             ? "Prêt à orchestrer ce qui est possible ?"
             : "Ready to orchestrate what’s possible?")}
-      </RevealText>
+      </h2>
     </>
   );
   const text = (

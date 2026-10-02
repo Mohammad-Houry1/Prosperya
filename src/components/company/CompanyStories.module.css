@@ -323,4 +323,7 @@
   .marqueeTrack {
     animation: none;
   }
+  .pause {
+    display: none;
+  }
 }

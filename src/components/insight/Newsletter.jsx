@@ -5,7 +5,7 @@ import styles from "./Newsletter.module.css";
 
 // The Close of Insights and Article pages. Sign-up is not connected yet:
 // validate, then say so plainly.
-export default function Newsletter({ article = false }) {
+export default function Newsletter({ title }) {
   const fr = useLocale().locale === "fr";
   const [state, setState] = useState("idle");
   const submit = (event) => {
@@ -17,11 +17,7 @@ export default function Newsletter({ article = false }) {
     <div className={styles.newsletter} data-reveal="card">
       <Mail size={44} strokeWidth={1} aria-hidden="true" />
       <div>
-        <h2>
-          {article
-            ? fr ? "Recevez la prochaine analyse." : "Get the next article first."
-            : fr ? "Restez informé. Gardez une longueur d’avance." : "Stay informed. Stay ahead."}
-        </h2>
+        <h2>{title ?? (fr ? "Restez informé. Gardez une longueur d’avance." : "Stay informed. Stay ahead.")}</h2>
         <p>
           {fr
             ? "Des analyses choisies sur l’ERP, NetSuite et la transformation, directement dans votre boîte."
