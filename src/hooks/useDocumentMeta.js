@@ -73,6 +73,11 @@ export function useDocumentMeta({
           new URL(replaceLocaleInPath(path, language), origin).href,
           language,
         );
+      link(
+        "alternate",
+        new URL(replaceLocaleInPath(path, "en"), origin).href,
+        "x-default",
+      );
     }
     return () => managed.forEach((element) => element.remove());
   }, [
